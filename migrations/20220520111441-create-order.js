@@ -16,7 +16,6 @@ module.exports = {
         defaultValue: 'open'
       },
       UserId: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {
