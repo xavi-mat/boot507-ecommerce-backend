@@ -1,0 +1,32 @@
+{
+  "name": "ecomerce-backend",
+  "version": "1.0.0",
+  "description": "esto es un readme!!!!!!!!",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js",
+    "dev": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dubesor22/eCommerce-backEnd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dubesor22/eCommerce-backEnd/issues"
+  },
+  "homepage": "https://github.com/Dubesor22/eCommerce-backEnd#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.19.2"
+  }
+}
