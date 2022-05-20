@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       gender: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('M', 'F')
       },
       active: {
         type: Sequelize.BOOLEAN
