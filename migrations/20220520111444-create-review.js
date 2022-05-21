@@ -17,9 +17,11 @@ module.exports = {
       content: {
         type: Sequelize.STRING
       },
+      stars: {
+        type: Sequelize.INTEGER
+      },
       active: {
         type: Sequelize.BOOLEAN,
-        defaulValue: true
       },
       createdAt: {
         allowNull: false,
