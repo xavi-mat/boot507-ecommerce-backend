@@ -26,7 +26,7 @@ router.get("/name/:name", ProductController.productByName);
 router.get("/price/:price", ProductController.productByPrice);
 
 // Filtro que ordene los productos de mayor a menor precio
-router.get("/listPrice", ProductController.productListPrice);
+router.get("/listPrice/desc", ProductController.productListPrice);
 // Implementa validación a la hora de crear un producto para que se rellene todos los campos y si no se hace que devuelva un mensaje
 // Solo podrás crear, actualizar y eliminar productos si estás autenticado.
 

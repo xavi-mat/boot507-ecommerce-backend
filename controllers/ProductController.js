@@ -77,14 +77,13 @@ const ProductController = {
     );
   },
 
-  ////////////////////
-  //revisar con xavi////
-  //////////////////
   productListPrice(req, res) {
     Product.findAll({
-      order: ["price", "DESC"],
+      order: [["price", "DESC"]],
     }).then((products) =>
-      res.status(200).send({ message: "your Product given By Price:", product })
+      res
+        .status(200)
+        .send({ message: "your Product given By Price:", products })
     );
   },
 };
