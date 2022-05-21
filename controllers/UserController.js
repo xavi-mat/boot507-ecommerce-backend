@@ -1,4 +1,5 @@
 const { User } = require("../models/index.js");
+const md5 = require('md5');
 
 const UserController = {
   create(req, res) {
@@ -17,10 +18,9 @@ const UserController = {
     }
 
     req.body.role = "user";         // Assing role by default
-    req.body.password += ":HASHED"  // TODO: Hash password with bycript
+    req.body.password = md5(req.body.password)  // TODO: Hash password with bycript
     req.body.active = true;
     User.create({ ...req.body })
-
       .then((user) =>
         res
           .status(201)
@@ -29,6 +29,24 @@ const UserController = {
 
       .catch(console.error);
   },
+
+  login(req, res) {
+    req.body.password = md5(req.body.password)  // TODO: Hash password with bycript
+    User.findOne({
+      where: {
+        email: req.body.email,
+        password: req.body.password
+      }
+    })
+      .then(result=> {
+        if (result) {
+          const jwt =  md5(Math.random());  // TODO: Cretate a real  JWT
+          res.send({ message: "Login successfull", id:result.id, jwt });
+        } else {
+          res.send({ message: "Login failed" });
+        }
+      })
+  }
 };
 
 module.exports = UserController;
