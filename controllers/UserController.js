@@ -62,6 +62,10 @@ const UserController = {
             })
     },
 
+    logout(req, res) {
+        res.send({ message: "Logout", jwt: null});
+    },
+
     async getUserWithOrders(req, res) {
         let valid = false;
         let id, role;
