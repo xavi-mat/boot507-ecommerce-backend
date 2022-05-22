@@ -12,7 +12,7 @@ const ProductController = {
 
       .catch((err) => {
         console.error(err);
-        res.send({ message: "Some error has occurred" })
+        res.send({ message: "Some error has occurred" });
       });
   },
 
@@ -42,17 +42,12 @@ const ProductController = {
         .send({ message: "🚨🚨Product was DELETED!!🚨🚨", product })
     );
   },
-  ////////////////////////////////////////
-  //Revisar (quiza sea un problema de las categorias)
-  /////
+
   showProductsCategory(req, res) {
-    Product.findAll({
-      where: { category: req.params.categories },
-    }).then((product) =>
+    Product.findAll().then((product) =>
       res.status(200).send({ message: "Search Category result:", product })
     );
   },
-  /////////////////////////////////////
 
   productById(req, res) {
     Product.findAll({

@@ -12,7 +12,7 @@ router.put("/:id", ProductController.updateProduct);
 router.delete("/:id", ProductController.deleteProdruct);
 
 // El endpoint de traer productos debe mostrarse junto a la categoría o categorías que pertenece
-router.get("/searchcat/:id", ProductController.showProductsCategory);
+router.get("/list", ProductController.showProductsCategory);
 
 // Endpoint que traiga un producto por su id
 router.get("/:id", ProductController.productById);
