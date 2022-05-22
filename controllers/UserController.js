@@ -81,26 +81,11 @@ const UserController = {
         // User's info
         allInfo.user = await User.findOne({ where: { id: id }, attributes: { exclude: ['password'] } });
         // Orders info
-        allInfo.orders = await Order.findAll({ where: { UserId: id } });
+        allInfo.orders = await Order.findAll({ where: { UserId: id }, include: Product });
 
-        // Details info
-        const allOrdersIds = allInfo.orders.map(order=>order.id);
-        allInfo.details = await Detail.findAll({ where: { OrderId: {[Op.in]: allOrdersIds}} });
-
-        // Products info
-        const allProductsId = allInfo.details.map(detail=>detail.ProductId);
-        allInfo.products = await Product.findAll({ where: { id: {[Op.in]: allProductsId}}});
-
-        // ATTEMPT 1. Not working
-        // allInfo.orders.forEach(order => {
-        //   order.details = Detail.findAll({where:{OrderId:order.id}});
-        // });
-
-        // ATTEMPT 2. Not working
-        // allInfo.orders = await allInfo.orders.map(async function(order) {
-        //     order.details = await Detail.findAll({where:{OrderId:order.id}});
-        //     return order;
-        // });
+        // Don't know how to use this:
+        // https://sequelize.org/docs/v6/core-concepts/assocs/#special-methodsmixins-added-to-instances
+        // allInfo.test = await User.getOrders();
 
         res.send(allInfo);
     }
