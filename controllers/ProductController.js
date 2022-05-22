@@ -10,7 +10,10 @@ const ProductController = {
           .send({ message: "Product was successfully created", product })
       )
 
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        res.send({ message: "Some error has occurred" })
+      });
   },
 };
 

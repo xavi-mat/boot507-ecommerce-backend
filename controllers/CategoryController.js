@@ -10,7 +10,10 @@ const CategoryController = {
           .send({ message: "Category was successfully created", category })
       )
 
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        res.send({ message: "Some error has occurred" })
+      });
   },
 };
 
