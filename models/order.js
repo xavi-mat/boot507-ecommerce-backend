@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Order.init({
     date: DataTypes.DATE,
-    status: DataTypes.ENUM("open", "paid", "sent", "delivered", "calcelled"),
+    status: DataTypes.ENUM("open", "paid", "sent", "delivered", "cancelled"),
     UserId: DataTypes.INTEGER
   }, {
     sequelize,

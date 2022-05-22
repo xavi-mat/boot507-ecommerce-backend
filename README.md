@@ -24,7 +24,7 @@ role: DataTypes.ENUM('user', 'premium', 'seller', 'manager', 'admin'),
 gender: DataTypes.ENUM("M", "F"),
 
 // Orders
-status: DataTypes.ENUM("open", "paid", "sent", "delivered", "calcelled"),
+status: DataTypes.ENUM("open", "paid", "sent", "delivered", "cancelled"),
 
 
 ```

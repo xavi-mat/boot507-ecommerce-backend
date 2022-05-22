@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       status: {
-        type: Sequelize.ENUM("open", "paid", "sent", "delivered", "calcelled")
+        type: Sequelize.ENUM("open", "paid", "sent", "delivered", "cancelled")
       },
       UserId: {
         type: Sequelize.INTEGER,
