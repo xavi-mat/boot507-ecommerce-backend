@@ -1,8 +1,6 @@
 const express = require("express");
-
-const router = express.Router();
-
 const ProductController = require("../controllers/ProductController");
+const router = express.Router();
 
 //Endpoint para crear un producto
 router.post("/", ProductController.create);

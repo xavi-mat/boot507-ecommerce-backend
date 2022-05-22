@@ -15,9 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Review.init({
     UserID: DataTypes.INTEGER,
-    ProductId: DataTypes.INTEGER,
-    content: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
+    ProductId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Review',

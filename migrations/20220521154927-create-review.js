@@ -9,17 +9,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       UserID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'users', key: 'id'}
       },
       ProductId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'products', key: 'id'}
       },
       content: {
         type: Sequelize.STRING
       },
-      active: {
-        type: Sequelize.BOOLEAN,
-        defaulValue: true
+      stars: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 1,
+          max: 5
+        }
       },
       createdAt: {
         allowNull: false,
