@@ -2,8 +2,11 @@ const express = require("express");
 const ProductController = require("../controllers/ProductController");
 const router = express.Router();
 
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 //Endpoint para crear un producto
-router.post("/", ProductController.create);
+router.post("/", upload.single("imagen"), ProductController.create);
 
 // Endpoint para actualizar un producto
 router.put("/:id", ProductController.updateProduct);

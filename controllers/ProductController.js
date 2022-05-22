@@ -2,7 +2,7 @@ const { Product } = require("../models/index.js");
 
 const ProductController = {
   create(req, res) {
-    Product.create({ ...req.body })
+    Product.create({ ...req.body }, { ...req.file })
 
       .then((product) =>
         res
