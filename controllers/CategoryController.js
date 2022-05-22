@@ -40,7 +40,7 @@ const CategoryController = {
     Category.findAll({
       where: { name: req.params.name },
     }).then((category) =>
-      res.status(200).send({ message: "your Product given By Name:", category })
+      res.status(200).send({ message: "your Category given By Name:", category })
     ).catch((err) => {
       console.error(err);
       res.send({ message: "Some error has occurred", err })
