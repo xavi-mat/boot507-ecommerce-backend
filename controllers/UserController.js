@@ -4,7 +4,7 @@ const { User, Order, Detail } = require("../models/index.js");
 const UserController = {
   create(req, res) {
     let valid = true
-    if (!req.body.username || !req.body.firstName || !req.body.lastName || !req.body.password) {
+    if (!req.body.username || !req.body.firstName || !req.body.lastName || !req.body.password || !req.body.email) {
       valid = false
     }
 
@@ -13,7 +13,7 @@ const UserController = {
     //   valid = false;
     // }
 
-    // TODO: User data: more validations
+    // TODO: User data: more validations ?
 
     if (!valid) {
       // TODO: Ask Sofía about the correct status to send on "invalid data"
@@ -26,13 +26,14 @@ const UserController = {
     req.body.password += ".HASH"    // TODO: Hash password with bycript
     req.body.active = true;
     User.create({ ...req.body })
-      .then((user) =>
-        res
-          .status(201)
-          .send({ message: "User was successfully created", user })
-      )
-
-      .catch(console.error);
+      .then((user) => {
+        res.status(201).send({ message: "User was successfully created", user });
+        })
+      .catch((err) => {
+        console.error(err);
+        res.status(422).send({message: "Invalid data"});
+        return;
+      });
   },
 
   login(req, res) {
