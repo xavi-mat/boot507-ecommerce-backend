@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('details', [
+    return queryInterface.bulkInsert('products', [
       { name: 'Product 1', price: 11, description: 'Description of product 1', CategoryId: 1, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Product 2', price: 22, description: 'Description of product 2', CategoryId: null, createdAt: new Date(), updatedAt: new Date() },
       { name: 'Product 3', price: 33, description: 'Description of product 3', CategoryId: 1, createdAt: new Date(), updatedAt: new Date() },
