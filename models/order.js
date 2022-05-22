@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     /**
@@ -11,18 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       Order.belongsTo(models.User);
       Order.belongsToMany(models.Product, { through: models.Detail });
       Order.belongsToMany(models.User, { through: models.Review });
+      // define association here
     }
   }
-  Order.init(
-    {
-      date: DataTypes.DATE,
-      status: DataTypes.ENUM("open", "paid", "sent", "delivered", "calcelled"),
-      UserId: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: "Order",
-    }
-  );
+  Order.init({
+    date: DataTypes.DATE,
+    status: DataTypes.ENUM("open", "paid", "sent", "delivered", "calcelled"),
+    UserId: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'Order',
+  });
   return Order;
 };

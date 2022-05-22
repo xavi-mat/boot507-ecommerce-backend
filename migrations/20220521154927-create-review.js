@@ -14,15 +14,6 @@ module.exports = {
       ProductId: {
         type: Sequelize.INTEGER
       },
-      content: {
-        type: Sequelize.STRING
-      },
-      stars: {
-        type: Sequelize.INTEGER
-      },
-      active: {
-        type: Sequelize.BOOLEAN,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
