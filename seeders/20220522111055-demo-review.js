@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('details', [
+    return queryInterface.bulkInsert('reviews', [
       { UserId: 1, ProductId: 1, content: "No tá mú güeno", stars: 2, createdAt: new Date(), updatedAt: new Date() },
       { UserId: 2, ProductId: 2, content: "Tá güeno", stars: 3, createdAt: new Date(), updatedAt: new Date() },
       { UserId: 3, ProductId: 3, content: "Tá güeno", stars: 3, createdAt: new Date(), updatedAt: new Date() },
