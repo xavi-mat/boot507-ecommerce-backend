@@ -45,7 +45,9 @@ const ProductController = {
 
   showProductsCategory(req, res) {
     Product.findAll().then((product) =>
-      res.status(200).send({ message: "Search Category result:", product })
+      res
+        .status(200)
+        .send({ message: "Search All Product and Category result:", product })
     );
   },
 
