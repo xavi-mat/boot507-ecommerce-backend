@@ -31,7 +31,7 @@ const ProductController = {
     );
   },
 
-  deleteProdruct(req, res) {
+  deleteProduct(req, res) {
     Product.destroy({
       where: {
         id: req.params.id,

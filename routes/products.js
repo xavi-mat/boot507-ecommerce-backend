@@ -9,7 +9,7 @@ router.post("/", ProductController.create);
 router.put("/:id", ProductController.updateProduct);
 
 // Endpoint para eliminar un producto
-router.delete("/:id", ProductController.deleteProdruct);
+router.delete("/:id", ProductController.deleteProduct);
 
 // El endpoint de traer productos debe mostrarse junto a la categoría o categorías que pertenece
 router.get("/list", ProductController.showProductsCategory);
