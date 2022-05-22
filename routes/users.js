@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post("/", UserController.create);  // Register a user
 router.post("/login", UserController.login);
-router.get("/", UserController.allInfo);
+router.get("/", UserController.getUserWithOrders);
 
 // TODO: More endpoints
 // router.get("/", UserController.getAll);
