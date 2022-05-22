@@ -14,7 +14,7 @@ sequelize model:generate --name Order --attributes date:date,status:enum,UserId:
 
 sequelize model:generate --name Detail --attributes OrderId:integer,ProductId:integer,quantity:integer
 
-sequelize model:generate --name Review --attributes UserID:integer,ProductId:integer
+sequelize model:generate --name Review --attributes UserID:integer,ProductId:integer,content:string,starts:integer
 ```
 
 Manually add the ENUM values:

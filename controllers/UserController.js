@@ -1,4 +1,5 @@
-const { User } = require("../models/index.js");
+'use strict';
+const { User, Order, Detail } = require("../models/index.js");
 
 const UserController = {
   create(req, res) {
@@ -44,13 +45,42 @@ const UserController = {
     })
       .then(result=> {
         if (result) {
-          // TODO: Cretate a real JWT:
-          const jwt =  "JWT code";
-          res.send({ message: "Login successfull", id:result.id, jwt });
+          // TODO: Create a real JWT:
+          // (a real JWT contains 'id' and 'role' information)
+          const jwt = result.id + '.' + result.role;
+          res.send({ message: "Login successfull", jwt });
         } else {
           res.send({ message: "Login failed" });
         }
       })
+  },
+
+  async allInfo(req, res) {
+    let valid = false;
+    let id, role;
+    // Check that user is Logged In
+    if (req.body.jwt) {
+      [id, role] = req.body.jwt.split('.');
+      valid = true;
+    }
+
+    if (!valid) {
+      res.status(401).send({message: "Unauthorized"});
+        return;
+    }
+
+    const allInfo = {id, role};
+
+    // User's info
+    allInfo.user = await User.findOne({where:{id: id}});
+    // Orders info
+    allInfo.orders = await Order.findAll({where:{UserId: id}});
+    // Details info
+    // TODO: Check asynchronicity here
+    allInfo.orders.forEach(order => {
+      order.details = Detail.findAll({where:{OrderId:order.id}});
+    });
+    res.send(allInfo);
   }
 };
 

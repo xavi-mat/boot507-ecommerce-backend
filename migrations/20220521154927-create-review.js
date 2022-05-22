@@ -10,11 +10,24 @@ module.exports = {
       },
       UserID: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: { model: 'users', key: 'id'}
       },
       ProductId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: { model: 'products', key: 'id'}
+      },
+      content: {
+        type: Sequelize.STRING
+      },
+      stars: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 1,
+          max: 5
+        }
       },
       createdAt: {
         allowNull: false,
