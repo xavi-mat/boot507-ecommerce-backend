@@ -22,8 +22,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       stars: {
-        type: Sequelize.INTEGER,
         allowNull: false,
+        type: Sequelize.INTEGER,
         validate: {
           min: 1,
           max: 5

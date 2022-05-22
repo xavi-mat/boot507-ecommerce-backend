@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Product.belongsTo(models.Category);
       Product.belongsToMany(models.Order, { through: models.Detail });
+      Product.belongsToMany(models.User, { through: models.Review });
     }
   }
   Product.init(
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.FLOAT,
       description: DataTypes.STRING,
       CategoryId: DataTypes.INTEGER,
+      active: DataTypes.BOOLEAN
     },
     {
       sequelize,
