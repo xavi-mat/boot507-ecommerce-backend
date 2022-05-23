@@ -42,7 +42,7 @@ const UserController = {
     },
 
     login(req, res) {
-        req.body.password += ".HASH"  // TODO: Hash password with bycript
+        
         User.findOne({
             where: {
                 email: req.body.email,
