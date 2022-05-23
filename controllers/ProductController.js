@@ -12,7 +12,7 @@ const ProductController = {
 
       .catch((err) => {
         console.error(err);
-        res.send({ message: "Some error has occurred" });
+        res.send({ message: "Some error has occurred", err });
       });
   },
 
@@ -28,10 +28,13 @@ const ProductController = {
       res
         .status(201)
         .send({ message: "Product was successfully updated", product })
-    );
+    ).catch((err) => {
+      console.error(err);
+      res.send({ message: "Some error has occurred", err })
+    });
   },
 
-  deleteProdruct(req, res) {
+  deleteProduct(req, res) {
     Product.destroy({
       where: {
         id: req.params.id,
@@ -40,7 +43,10 @@ const ProductController = {
       res
         .status(201)
         .send({ message: "🚨🚨Product was DELETED!!🚨🚨", product })
-    );
+    ).catch((err) => {
+      console.error(err);
+      res.send({ message: "Some error has occurred", err })
+    });
   },
 
   showProductsCategory(req, res) {
@@ -48,7 +54,10 @@ const ProductController = {
       res
         .status(200)
         .send({ message: "Search All Product and Category result:", product })
-    );
+    ).catch((err) => {
+      console.error(err);
+      res.send({ message: "Some error has occurred", err })
+    });
   },
 
   productById(req, res) {
@@ -58,7 +67,10 @@ const ProductController = {
       },
     }).then((product) =>
       res.status(200).send({ message: "your Product shorted By ID:", product })
-    );
+    ).catch((err) => {
+      console.error(err);
+      res.send({ message: "Some error has occurred", err })
+    });
   },
 
   productByName(req, res) {
@@ -66,7 +78,10 @@ const ProductController = {
       where: { name: req.params.name },
     }).then((product) =>
       res.status(200).send({ message: "your Product given By Name:", product })
-    );
+    ).catch((err) => {
+      console.error(err);
+      res.send({ message: "Some error has occurred", err })
+    });
   },
 
   productByPrice(req, res) {
@@ -74,7 +89,10 @@ const ProductController = {
       where: { price: req.params.price },
     }).then((product) =>
       res.status(200).send({ message: "your Product given By Price:", product })
-    );
+    ).catch((err) => {
+      console.error(err);
+      res.send({ message: "Some error has occurred", err })
+    });
   },
 
   productListPrice(req, res) {
@@ -84,7 +102,10 @@ const ProductController = {
       res
         .status(200)
         .send({ message: "your Product given By Price:", products })
-    );
+    ).catch((err) => {
+      console.error(err);
+      res.send({ message: "Some error has occurred", err })
+    });
   },
 };
 

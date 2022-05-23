@@ -8,13 +8,13 @@ sequelize model:generate --name User --attributes username:string,firstName:stri
 
 sequelize model:generate --name Category --attributes name:string
 
-sequelize model:generate --name Product --attributes name:string,price:float,description:string,CategoryId:integer
+sequelize model:generate --name Product --attributes name:string,price:float,description:string,CategoryId:integer,active:boolean
 
 sequelize model:generate --name Order --attributes date:date,status:enum,UserId:integer
 
-sequelize model:generate --name Detail --attributes OrderId:integer,ProductId:integer,quantity:integer
+sequelize model:generate --name Detail --attributes OrderId:integer,ProductId:integer,quantity:integer,price:float
 
-sequelize model:generate --name Review --attributes UserID:integer,ProductId:integer,content:string,starts:integer
+sequelize model:generate --name Review --attributes UserID:integer,ProductId:integer,content:string,starts:integer,active:boolean
 ```
 
 Manually add the ENUM values:
