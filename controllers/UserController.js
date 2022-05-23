@@ -2,6 +2,7 @@
 
 const { User, Order, Detail, Product } = require("../models/index.js");
 const { Op } = require("sequelize");
+const bcrypt = require ('bcryptjs');
 
 const UserController = {
     create(req, res) {
@@ -14,6 +15,9 @@ const UserController = {
         // if (!validateEmail(re.body.email)) {
         //   valid = false;
         // }
+
+        // Hash password
+        req.body.password = bcrypt.hashSync(req.body.password,10);
 
         // TODO: User data: more validations ?
 
