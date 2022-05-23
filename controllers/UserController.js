@@ -2,7 +2,7 @@
 
 const { User, Order, Detail, Product } = require("../models/index.js");
 const { Op } = require("sequelize");
-const bcrypt = require ('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 const UserController = {
     create(req, res) {
@@ -16,9 +16,6 @@ const UserController = {
         //   valid = false;
         // }
 
-
-        // TODO: User data: more validations ?
-
         if (!valid) {
             // TODO: Ask Sofía about the correct status to send on "invalid data"
             res.status(422)
@@ -27,7 +24,7 @@ const UserController = {
         }
 
         req.body.role = "user";         // Assing role by default
-        req.body.password = bcrypt.hashSync(req.body.password,10);
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
         req.body.active = true;
 
         User.create(req.body)
@@ -42,7 +39,7 @@ const UserController = {
     },
 
     login(req, res) {
-        
+
         User.findOne({
             where: {
                 email: req.body.email,
@@ -61,12 +58,28 @@ const UserController = {
             })
             .catch(err => {
                 console.error(err);
-                res.status(500).send({message: "Internal error"});
+                res.status(500).send({ message: "Internal error" });
             })
     },
 
     logout(req, res) {
-        res.send({ message: "Logout", jwt: null});
+        Token.destroy({
+            where: {
+                [Op.and]: [
+                    { UserId: req.user.id },
+                    { token: req.headers.authorization }
+                ]
+            }
+        })
+        .then(result=> {
+            console.log(result);
+            res.send({ message: 'Desconectado con éxito', result })
+
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(500).send({ message: 'hubo un problema al tratar de desconectarte' })
+        })
     },
 
     async getUserWithOrders(req, res) {
