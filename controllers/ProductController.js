@@ -13,7 +13,7 @@ const ProductController = {
       return;
     }
 
-    Product.create({ ...req.body }, { ...req.file })
+    Product.create({ ...req.body }, req.file)
 
       .then((product) =>
         res
