@@ -91,6 +91,7 @@ const ProductController = {
       where: {
         id: req.params.id,
       },
+      include: [Category, Review]
     })
       .then((product) =>
         res
