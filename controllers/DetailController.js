@@ -1,4 +1,4 @@
-const { Detail } = require("../models/index.js");
+const { Detail, Category } = require("../models/index.js");
 
 const DetailController = {
   create(req, res) {
@@ -16,11 +16,6 @@ const DetailController = {
       });
   },
 
-  showAllcategoryProduct(req, res) {
-    Category.findAll().then((category) =>
-      res.status(200).send({ message: "Categories Listed: ", category })
-    );
-  },
 };
 
 module.exports = DetailController;
