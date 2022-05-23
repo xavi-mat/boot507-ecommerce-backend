@@ -1,4 +1,4 @@
-const { Product } = require("../models/index.js");
+const { Product, Category, Review } = require("../models/index.js");
 
 const ProductController = {
   create(req, res) {
@@ -74,7 +74,7 @@ const ProductController = {
   },
 
   showProductsCategory(req, res) {
-    Product.findAll()
+    Product.findAll({include:[Category, Review]})
       .then((product) =>
         res
           .status(200)

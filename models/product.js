@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.Category, { onDelete: "SET NULL" });
       Product.belongsToMany(models.Order, { through: models.Detail });
       Product.belongsToMany(models.User, { through: models.Review });
+      Product.hasMany(models.Review);
     }
   }
   Product.init(
