@@ -1,8 +1,10 @@
 "use strict";
 
-const { User, Order, Detail, Product } = require("../models/index.js");
+const { User, Order, Detail, Product, Token } = require("../models/index.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { jwt_secret } = require("../config/config.json")["development"];
 
 const UserController = {
   create(req, res) {
@@ -65,8 +67,11 @@ const UserController = {
             .status(400)
             .send({ message: "Usuario o contraseña incorrectos" });
         }
-
-        res.send(user);
+        const token = jwt.sign({ id: user.id }, jwt_secret);
+        Token.create({ token, UserId: user.id }).catch((err) => {
+          console.error(err);
+        });
+        res.send({ message: "Wellcome" + user.name, user, token });
       })
       .catch((err) => {
         console.error(err);
