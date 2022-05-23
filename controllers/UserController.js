@@ -1,6 +1,6 @@
 'use strict';
 
-const { User, Order, Detail, Product } = require("../models/index.js");
+const { User, Order, Product, Token } = require("../models/index.js");
 const { Op } = require("sequelize");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
