@@ -16,8 +16,6 @@ const UserController = {
         //   valid = false;
         // }
 
-        // Hash password
-        req.body.password = bcrypt.hashSync(req.body.password,10);
 
         // TODO: User data: more validations ?
 
@@ -29,9 +27,10 @@ const UserController = {
         }
 
         req.body.role = "user";         // Assing role by default
-        req.body.password += ".HASH"    // TODO: Hash password with bycript
+        req.body.password = bcrypt.hashSync(req.body.password,10);
         req.body.active = true;
-        User.create({ ...req.body })
+
+        User.create(req.body)
             .then((user) => {
                 res.status(201).send({ message: "User was successfully created", user });
             })
