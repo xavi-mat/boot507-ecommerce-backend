@@ -1,20 +1,14 @@
 const express = require("express");
 const ProductController = require("../controllers/ProductController");
+const { authentication, isManager } = require('../middleware/authentication');
 const router = express.Router();
 
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
-//Endpoint para crear un producto
-router.post("/", upload.single("imagen"), ProductController.create);
-
-// Endpoint para actualizar un producto
-router.put("/:id", ProductController.updateProduct);
-
-// Endpoint para eliminar un producto
-router.delete("/:id", ProductController.deleteProduct);
-
-// El endpoint de traer productos debe mostrarse junto a la categoría o categorías que pertenece
+router.post("/", authentication, isManager, upload.single("imagen"), ProductController.create);
+router.put("/:id", authentication, isManager, ProductController.updateProduct);
+router.delete("/:id", authentication, isManager, ProductController.deleteProduct);
 router.get("/list", ProductController.showProductsCategory);
 
 // Endpoint que traiga un producto por su id
