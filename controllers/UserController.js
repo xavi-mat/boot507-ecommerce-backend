@@ -3,6 +3,8 @@
 const { User, Order, Detail, Product } = require("../models/index.js");
 const { Op } = require("sequelize");
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const {jwt_secret} = require('../config/config.json')['development'];
 
 const UserController = {
     create(req, res) {
