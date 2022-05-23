@@ -1,6 +1,6 @@
 "use strict";
 
-const { User, Order, Detail, Product, Token } = require("../models/index.js");
+const { User, Order, Product, Token } = require("../models/index.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -24,8 +24,6 @@ const UserController = {
     //   valid = false;
     // }
 
-    // TODO: User data: more validations ?
-
     if (!valid) {
       // TODO: Ask Sofía about the correct status to send on "invalid data"
       res.status(422).send({ message: "Invalid data" });
@@ -33,9 +31,10 @@ const UserController = {
     }
 
     req.body.role = "user"; // Assing role by default
-    req.body.password += ".HASH"; // TODO: Hash password with bycript
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
     req.body.active = true;
-    User.create({ ...req.body })
+
+    User.create(req.body)
       .then((user) => {
         res
           .status(201)
@@ -47,40 +46,26 @@ const UserController = {
         return;
       });
   },
-  login(req, res) {
-    User.findOne({
-      where: {
-        email: req.body.email,
-      },
-    })
-      .then((user) => {
-        if (!user) {
-          return res
-            .status(400)
-            .send({ message: "Usuario o contraseña incorrectos" });
-        }
-
-        const isMatch = bcrypt.compareSync(req.body.password, user.password);
-
-        if (!isMatch) {
-          return res
-            .status(400)
-            .send({ message: "Usuario o contraseña incorrectos" });
-        }
-        const token = jwt.sign({ id: user.id }, jwt_secret);
-        Token.create({ token, UserId: user.id }).catch((err) => {
-          console.error(err);
-        });
-        res.send({ message: "Wellcome" + user.name, user, token });
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send({ message: "Internal error" });
-      });
-  },
 
   logout(req, res) {
-    res.send({ message: "Logout", jwt: null });
+    Token.destroy({
+      where: {
+        [Op.and]: [
+          { UserId: req.user.id },
+          { token: req.headers.authorization },
+        ],
+      },
+    })
+      .then((result) => {
+        console.log(result);
+        res.send({ message: "Desconectado con éxito", result });
+      })
+      .catch((err) => {
+        console.log(err);
+        res
+          .status(500)
+          .send({ message: "hubo un problema al tratar de desconectarte" });
+      });
   },
 
   async getUserWithOrders(req, res) {
@@ -115,6 +100,38 @@ const UserController = {
     // allInfo.test = await User.getOrders();
 
     res.send(allInfo);
+  },
+
+  login(req, res) {
+    User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    })
+      .then((user) => {
+        if (!user) {
+          return res
+            .status(400)
+            .send({ message: "Usuario o contraseña incorrectos" });
+        }
+
+        const isMatch = bcrypt.compareSync(req.body.password, user.password);
+
+        if (!isMatch) {
+          return res
+            .status(400)
+            .send({ message: "Usuario o contraseña incorrectos" });
+        }
+        const token = jwt.sign({ id: user.id }, jwt_secret);
+        Token.create({ token, UserId: user.id }).catch((err) => {
+          console.error(err);
+        });
+        res.send({ message: "Wellcome" + user.name, user, token });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send({ message: "Internal error" });
+      });
   },
 };
 
