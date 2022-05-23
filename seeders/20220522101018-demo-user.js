@@ -12,7 +12,7 @@ module.exports = {
          * }], {});
         */
         return queryInterface.bulkInsert('users', [
-            { username: 'johndoe1', firstName: 'John1', lastName: 'Doe1', email: 'john@doe1.com', password: '$2a$10$a0A/bq3VlVMJbo77yID/kuce3wox5yusHbvoNtya79Wf.1NoQBw/G', role: 'user', createdAt: new Date(), updatedAt: new Date() },
+            { username: 'johndoe1', firstName: 'John1', lastName: 'Doe1', email: 'john@doe1.com', password: '$2a$10$a0A/bq3VlVMJbo77yID/kuce3wox5yusHbvoNtya79Wf.1NoQBw/G', role: 'admin', createdAt: new Date(), updatedAt: new Date() },
             { username: 'johndoe2', firstName: 'John2', lastName: 'Doe2', email: 'john@doe2.com', password: '$2a$10$a0A/bq3VlVMJbo77yID/kuce3wox5yusHbvoNtya79Wf.1NoQBw/G', role: 'user', createdAt: new Date(), updatedAt: new Date() },
             { username: 'johndoe3', firstName: 'John3', lastName: 'Doe3', email: 'john@doe3.com', password: '$2a$10$a0A/bq3VlVMJbo77yID/kuce3wox5yusHbvoNtya79Wf.1NoQBw/G', role: 'user', createdAt: new Date(), updatedAt: new Date() },
             { username: 'johndoe4', firstName: 'John4', lastName: 'Doe4', email: 'john@doe4.com', password: '$2a$10$a0A/bq3VlVMJbo77yID/kuce3wox5yusHbvoNtya79Wf.1NoQBw/G', role: 'user', createdAt: new Date(), updatedAt: new Date() },
