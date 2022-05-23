@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Product.belongsTo(models.Category);
+      Product.belongsTo(models.Category, { onDelete: "SET NULL" });
       Product.belongsToMany(models.Order, { through: models.Detail });
       Product.belongsToMany(models.User, { through: models.Review });
     }
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.FLOAT,
       description: DataTypes.STRING,
       CategoryId: DataTypes.INTEGER,
-      active: DataTypes.BOOLEAN
+      active: DataTypes.BOOLEAN,
     },
     {
       sequelize,
