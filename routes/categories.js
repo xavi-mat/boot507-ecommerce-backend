@@ -15,4 +15,8 @@ router.get("/categorybyid/:id", CategoryController.categoryById);
 // Filtro para buscar categoría por nombre
 router.get("/categorybyname/:name", CategoryController.categorByName);
 
+router.put("/update/:id", CategoryController.updateCategory);
+
+router.delete("/delete/:id", CategoryController.deleteCategory);
+
 module.exports = router;
