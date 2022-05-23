@@ -20,7 +20,6 @@ const ProductController = {
           .status(201)
           .send({ message: "Product was successfully created", product })
       )
-
       .catch((err) => {
         console.error(err);
         res.send({ message: "Some error has occurred", err });
