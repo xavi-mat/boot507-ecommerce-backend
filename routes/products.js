@@ -10,14 +10,8 @@ router.post("/", authentication, isManager, upload.single("imagen"), ProductCont
 router.put("/:id", authentication, isManager, ProductController.updateProduct);
 router.delete("/:id", authentication, isManager, ProductController.deleteProduct);
 router.get("/list", ProductController.showProductsCategory);
-
-// Endpoint que traiga un producto por su id
 router.get("/:id", ProductController.productById);
-
-// Filtro para buscar producto por nombre
 router.get("/name/:name", ProductController.productByName);
-
-// Filtro para buscar producto por precio
 router.get("/price/:price", ProductController.productByPrice);
 
 // Filtro que ordene los productos de mayor a menor precio
