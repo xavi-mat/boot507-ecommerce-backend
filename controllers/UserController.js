@@ -126,7 +126,7 @@ const UserController = {
         Token.create({ token, UserId: user.id }).catch((err) => {
           console.error(err);
         });
-        res.send({ message: "Wellcome" + user.name, user, token });
+        res.send({ message: "Wellcome " + user.username, user, token });
       })
       .catch((err) => {
         console.error(err);
