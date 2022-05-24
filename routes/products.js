@@ -6,7 +6,7 @@ const router = express.Router();
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
-router.post("/", authentication, isManager, upload.single("imagen"), ProductController.create);
+router.post("/", authentication, isManager, upload.single("image"), ProductController.create);
 router.put("/:id", authentication, isManager, ProductController.updateProduct);
 router.delete("/:id", authentication, isManager, ProductController.deleteProduct);
 router.get("/list", ProductController.showProductsCategory);

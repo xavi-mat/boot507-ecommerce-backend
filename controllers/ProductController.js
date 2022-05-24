@@ -13,8 +13,12 @@ const ProductController = {
       return;
     }
 
-    Product.create({ ...req.body }, req.file)
+    // If there is an image, save the filename
+    if (req.file) {
+      req.body.image = req.file.filename;
+    }
 
+    Product.create({ ...req.body }, req.file)
       .then((product) =>
         res
           .status(201)
