@@ -64,7 +64,7 @@ const ProductController = {
     })
       .then((product) =>
         res
-          .status(201)
+          .status(200)
           .send({ message: "🚨🚨Product was DELETED!!🚨🚨", product })
       )
       .catch((err) => {
