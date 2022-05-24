@@ -63,19 +63,19 @@ sequelize db:seed:all
 |POST  |`/users`|anyone|Register new user|
 |POST  |`/users/login`|anyone|Login|
 |GET   |`/users`|user|Get own data with orders|
-|GET   |`/users/:id`|anyone|Get public data of user by UserId|
-|GET   |`/users//avatar/:avatar`|anyone|Get public avatar of user by UserId|
+|GET   |`/users/:id`|anyone|Get public data of user by `id`|
+|GET   |`/users//avatar/:avatar`|anyone|Get public avatar of user by `id`|
 |PUT   |`/users`|user|Update own data|
 |DELETE|`/users/delete`|user|Logout|
 |POST  |`/categories`|manager|Create new category|
 |GET   |`/categories`|anyone|Get all categories list|
-|GET   |`/categories/id/:id`|anyone|Get category by id|
+|GET   |`/categories/id/:id`|anyone|Get category by `id`|
 |GET   |`/categories/name/:name`|anyone|Get category by name|
-|PUT   |`/categories/:id`|manager|Update category by id|
-|DELETE|`/categories/:id`|manager|Delete category by id|
+|PUT   |`/categories/:id`|manager|Update category by `id`|
+|DELETE|`/categories/:id`|manager|Delete category by `id`|
 |POST  |`/products`|manager|Create a new product|
 |GET   |`/products/list`|anyone|Get all products|
-|GET   |`/products/id/:id`|anyone|Get a product by id|
+|GET   |`/products/id/:id`|anyone|Get a product by `id`|
 |GET   |`/products/name/:name`|anyone|Get a product by name|
 |GET   |`/products/price/:price`|anyone|Get products by price|
 |GET   |`/products/listPrice/desc`|anyone|Get all products ordered by price, descending|
@@ -85,7 +85,7 @@ sequelize db:seed:all
 |POST  |`/orders`|user|Create new order|
 |POST  |`/orders/product`|user|Add new product to own order|
 |GET   |`/orders`|user|Get all own orders|
-|GET   |`/orders/:id`|user|Get own order by id|
+|GET   |`/orders/:id`|user|Get own order by `id`|
 |PUT   |`/orders/product`|user|Update product in own order|
 |DELETE|`/orders/:id`|user|Delete own order (TODO)|
 |DELETE|`/orders/product/:id`|user|Delete product in own order (TODO)|
