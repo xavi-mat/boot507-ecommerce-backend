@@ -60,6 +60,14 @@ const CategoryController = {
     categorByName(req, res) {
         Category.findAll({
             where: { name: req.params.name },
+            include: {
+                model: Product,
+                attributes:["id", "name"],
+                through:{
+                    model: ProductCategory,
+                    attributes: []
+                }
+            }
         })
             .then((category) =>
                 res
