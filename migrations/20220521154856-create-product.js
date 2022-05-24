@@ -9,7 +9,6 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       price: {
@@ -17,10 +16,6 @@ module.exports = {
       },
       description: {
         type: Sequelize.STRING,
-      },
-      CategoryId: {
-        type: Sequelize.INTEGER,
-        references: { model: "categories", key: "id", onDelete: "SET NULL" },
       },
       active: {
         type: Sequelize.BOOLEAN,

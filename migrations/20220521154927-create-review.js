@@ -10,19 +10,16 @@ module.exports = {
       },
       UserId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: { model: 'users', key: 'id'}
       },
       ProductId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: { model: 'products', key: 'id'}
       },
       content: {
         type: Sequelize.STRING
       },
       stars: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         validate: {
           min: 1,

@@ -9,28 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       username: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       firstName: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       lastName: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       email: {
-        allowNull: false,
         unique: true,
         type: Sequelize.STRING
       },
       password: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       role: {
-        allowNull: false,
         type: Sequelize.ENUM('user', 'premium', 'seller', 'manager', 'admin')
       },
       birthDate: {
