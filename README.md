@@ -58,6 +58,8 @@ sequelize db:seed:all
 
 ## Endpoints
 
+|method|endpoint|
+|---|---|
 |POST  |  /users/|
 |GET   |  /users/|
 |PUT   |  /users/|
