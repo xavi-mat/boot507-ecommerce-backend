@@ -55,3 +55,38 @@ sequelize db:create
 sequelize db:migrate
 sequelize db:seed:all
 ```
+
+## Endpoints
+
+|POST  |  /users/|
+|GET   |  /users/|
+|PUT   |  /users/|
+|DELETE|  /users/|
+
+POST    /users/
+GET     /users/
+PUT     /users/
+DELETE  /users/
+
+POST    /categories/
+GET     /categories/
+PUT     /categories/
+DELETE  /categories/
+
+POST    /products/
+GET     /products/
+PUT     /products/
+DELETE  /products/
+
+POST    /orders/
+GET     /orders/
+PUT     /orders/
+DELETE  /orders/
+
+POST    /reviews/
+GET     /reviews/
+PUT     /reviews/
+DELETE  /reviews/
+
+
+```
