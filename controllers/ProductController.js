@@ -74,7 +74,7 @@ const ProductController = {
   },
 
   showProductsCategory(req, res) {
-    Product.findAll()
+    Product.findAll({ include: Category.name })
       .then((product) =>
         res
           .status(200)
