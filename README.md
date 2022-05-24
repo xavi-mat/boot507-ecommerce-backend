@@ -58,25 +58,26 @@ sequelize db:seed:all
 
 ## Endpoints
 
-|method|endpoint|use|
-|---|---|---|
-|POST  |  /users/|
-|GET   |  /users/|
-|PUT   |  /users/|
-|DELETE|  /users/|
-|POST  |  /categories/|
-|GET   |  /categories/|
-|PUT   |  /categories/|
-|DELETE|  /categories/|
-|POST  |  /products/|
-|GET   |  /products/|
-|PUT   |  /products/|
-|DELETE|  /products/|
-|POST  |  /orders/|
-|GET   |  /orders/|
-|PUT   |  /orders/|
-|DELETE|  /orders/|
-|POST  |  /reviews/|
-|GET   |  /reviews/|
-|PUT   |  /reviews/|
-|DELETE|  /reviews/|
+|method|endpoint|authentication|use|
+|------|--------|--------------|---|
+|POST  |  /users|no|Register new user|
+|POST  |  /users/login|no|Login|
+|GET   |  /users/|||
+|PUT   |  /users/|||
+|DELETE|  /users/|||
+|POST  |  /categories/|||
+|GET   |  /categories/|||
+|PUT   |  /categories/|||
+|DELETE|  /categories/|||
+|POST  |  /products/|||
+|GET   |  /products/|||
+|PUT   |  /products/|||
+|DELETE|  /products/|||
+|POST  |  /orders/|||
+|GET   |  /orders/|||
+|PUT   |  /orders/|||
+|DELETE|  /orders/|||
+|POST  |  /reviews/|||
+|GET   |  /reviews/|||
+|PUT   |  /reviews/|||
+|DELETE|  /reviews/|||
