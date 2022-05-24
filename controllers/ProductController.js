@@ -18,7 +18,7 @@ const ProductController = {
       req.body.image = req.file.filename;
     }
 
-    Product.create({ ...req.body }, req.file)
+    Product.create(req.body)
       .then((product) =>
         res
           .status(201)
