@@ -179,6 +179,23 @@ const UserController = {
     avatar(req, res) {
         const filepath = path.join(__dirname, '../avatars', req.params.avatar);
         res.sendFile(filepath, {headers: {"Content-Type": "image/jpeg"}});
+    },
+
+    getPublicUserInfo(req, res) {
+        User.findOne({
+            where: {
+                id: req.params.id,
+                role: "user"
+            },
+            attributes: ["id", "username", "avatar"]
+        })
+        .then(user=>{
+            res.send({user})
+        })
+        .catch(error=>{
+            console.log(error);
+            res.status(400).send({message: "Error"})
+        })
     }
 };
 
