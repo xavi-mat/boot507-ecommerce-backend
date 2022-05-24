@@ -25,8 +25,7 @@ const UserController = {
         // }
 
         if (!valid) {
-            // TODO: Ask Sofía about the correct status to send on "invalid data"
-            res.status(422).send({ message: "Invalid data" });
+            res.status(400).send({ message: "Invalid data" });
             return;
         }
 
@@ -150,8 +149,7 @@ const UserController = {
             // }
 
             if (!valid) {
-                // TODO: Ask Sofía about the correct status to send on "invalid data"
-                return res.status(422).send({ message: "Invalid data" });
+                return res.status(400).send({ message: "Invalid data" });
             }
 
             // Dont' allow to update 'role':
