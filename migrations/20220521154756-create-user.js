@@ -33,6 +33,9 @@ module.exports = {
       gender: {
         type: Sequelize.ENUM("M", "F")
       },
+      avatar: {
+        type: Sequelize.STRING
+      },
       active: {
         type: Sequelize.BOOLEAN
       },
