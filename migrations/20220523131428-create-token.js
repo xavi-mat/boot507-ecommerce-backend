@@ -10,11 +10,9 @@ module.exports = {
       },
       token: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       UserId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: { model: "users", key: "id" },
       },
       createdAt: {

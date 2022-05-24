@@ -9,15 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       date: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       status: {
-        allowNull: false,
         type: Sequelize.ENUM("open", "paid", "sent", "delivered", "cancelled")
       },
       UserId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id'}
       },
