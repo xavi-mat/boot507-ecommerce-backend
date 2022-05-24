@@ -1,4 +1,4 @@
-const { Category, Product } = require("../models/index.js");
+const { Category, Product, ProductCategory } = require("../models/index.js");
 
 const CategoryController = {
     create(req, res) {
@@ -15,7 +15,16 @@ const CategoryController = {
     },
 
     showAllcategoryProduct(req, res) {
-        Category.findAll({ include: Product })
+        Category.findAll({
+            include: {
+                model: Product,
+                attributes:["id", "name"],
+                through:{
+                    model: ProductCategory,
+                    attributes: []
+                }
+            }
+        })
             .then((category) =>
                 res.status(200).send({ message: "Categories Listed", category })
             )
@@ -30,6 +39,14 @@ const CategoryController = {
             where: {
                 id: req.params.id,
             },
+            include: {
+                model: Product,
+                attributes:["id", "name"],
+                through:{
+                    model: ProductCategory,
+                    attributes: []
+                }
+            }
         })
             .then((category) =>
                 res.status(200).send({ message: "Categories by Id Listed: ", category })
