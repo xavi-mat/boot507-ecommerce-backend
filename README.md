@@ -91,7 +91,7 @@ sequelize db:seed:all
 |DELETE|`/orders/product/:id`|user|Delete product in own order (TODO)|
 |POST  |`/reviews`|user|Create a new review of a product|
 |GET   |`/reviews`|anyone|Get all reviews|
-|GET   |`/reviews/byProduct/:id`|anyone|Get all reviews of a product|
-|GET   |`/reviews//byUser/:id`|anyone|Get al reviews written by a user|
+|GET   |`/reviews/product/:id`|anyone|Get all reviews of a product|
+|GET   |`/reviews/user/:id`|anyone|Get al reviews written by a user|
 |PUT   |`/reviews/:id`|manager|Update a review|
 |DELETE|`/reviews/:id`|user|Delete own review|
