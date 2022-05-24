@@ -1,4 +1,5 @@
 const { Product, Category, ProductCategory } = require("../models/index.js");
+const path = require("path");
 
 const ProductController = {
   create(req, res) {
