@@ -1,5 +1,4 @@
-const { Review, User, Product } = require("../models/index.js");
-const { Op } = require("sequelize");
+const { Review } = require("../models/index.js");
 
 const ReviewController = {
   create(req, res) {
@@ -34,62 +33,6 @@ const ReviewController = {
       .then((result) => {
         res.send({ message: "Reviews by User", result });
       })
-      .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
-      });
-  },
-
-  getAllReviews(req, res) {
-    Review.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["username"],
-        },
-        { model: Product, attributes: ["name"] },
-      ],
-    })
-      .then((result) => {
-        res.send({ message: "Reviews by User", result });
-      })
-      .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
-      });
-  },
-
-  updateReview(req, res) {
-    Product.update(
-      { ...req.body },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    )
-      .then((result) =>
-        res
-          .status(201)
-          .send({ message: "Review was successfully updated", result })
-      )
-      .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
-      });
-  },
-
-  deleteReview(req, res) {
-    Product.destroy({
-      where: {
-        [Op.and]: [{ id: req.params.id }, { UserId: req.user.id }],
-      },
-    })
-      .then((result) =>
-        res
-          .status(200)
-          .send({ message: "🚨🚨 Review was DELETED!!🚨🚨", result })
-      )
       .catch((err) => {
         console.error(err);
         res.send({ message: "Some error has occurred", err });
