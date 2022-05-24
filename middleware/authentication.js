@@ -31,14 +31,14 @@ const isAdmin = async (req, res, next) => {
   next();
 };
 const isManager = async (req, res, next) => {
-  if (!["manager"].includes(req.user.role)) {
+  if (!["manager", "admin"].includes(req.user.role)) {
     return res.status(403).send({ message: "Forbidden" });
   }
   next();
 };
 
 const isSeller = async (req, res, next) => {
-  if (!["seller"].includes(req.user.role)) {
+  if (!["seller", "manager", "admin"].includes(req.user.role)) {
     return res.status(403).send({ message: "Forbidden" });
   }
   next();
