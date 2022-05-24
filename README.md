@@ -67,14 +67,12 @@ sequelize db:seed:all
 |GET   |`/users//avatar/:avatar`|anyone|Get public avatar of user by UserId|
 |PUT   |`/users`|user|Update own data|
 |DELETE|`/users/delete`|user|Logout|
-
 |POST  |`/categories`|manager|Create new category|
 |GET   |`/categories`|anyone|Get all categories list|
 |GET   |`/categories/id/:id`|anyone|Get category by id|
 |GET   |`/categories/name/:name`|anyone|Get category by name|
 |PUT   |`/categories/:id`|manager|Update category by id|
 |DELETE|`/categories/:id`|manager|Delete category by id|
-
 |POST  |`/products`|manager|Create a new product|
 |GET   |`/products/list`|anyone|Get all products|
 |GET   |`/products/id/:id`|anyone|Get a product by id|
@@ -84,12 +82,13 @@ sequelize db:seed:all
 |GET   |`/products/image/:image`|anyone|Get the image of a product|
 |PUT   |`/products/:id`|manager|Update a product|
 |DELETE|`/products/:id`|manager|Delete a product|
-
-|POST  |`/orders/`|||
-|GET   |`/orders/`|||
-|PUT   |`/orders/`|||
-|DELETE|`/orders/`|||
-
+|POST  |`/orders`|user|Create new order|
+|POST  |`/orders/product`|user|Add new product to own order|
+|GET   |`/orders`|user|Get all own orders|
+|GET   |`/orders/:id`|user|Get own order by id|
+|PUT   |`/orders/product`|user|Update product in own order|
+|DELETE|`/orders/:id`|user|Delete own order (TODO)|
+|DELETE|`/orders/product/:id`|user|Delete product in own order (TODO)|
 |POST  |`/reviews`|user|Create a new review of a product|
 |GET   |`/reviews`|anyone|Get all reviews|
 |GET   |`/reviews/byProduct/:id`|anyone|Get all reviews of a product|
