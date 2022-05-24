@@ -1,10 +1,11 @@
 "use strict";
 
-const { User, Order, Product, Token } = require("../models/index.js");
+const { User, Order, Detail, Product, Token } = require("../models/index.js");
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.json")["development"];
+const path = require("path");
 
 const UserController = {
     create(req, res) {
@@ -68,35 +69,24 @@ const UserController = {
     },
 
     async getUserWithOrders(req, res) {
-        let valid = false;
-        let id, role;
-        // Check that user is Logged In
-        if (req.body.jwt) {
-            [id, role] = req.body.jwt.split(".");
-            valid = true;
-        }
-
-        if (!valid || !id || !role) {
-            res.status(401).send({ message: "Unauthorized" });
-            return;
-        }
-
         const allInfo = {};
 
         // User's info
-        allInfo.user = await User.findOne({
-            where: { id: id },
+        allInfo.user = await User.findByPk(req.user.id,{
             attributes: { exclude: ["password"] },
+            include: {
+                model: Order,
+                attributes: ["id", "date"],
+                include: {
+                    model: Detail,
+                    attributes: ["id", "quantity", "price"],
+                    include: {
+                        model: Product,
+                        attributes: ["id", "name", "image"]
+                    }
+                }
+            }
         });
-        // Orders info
-        allInfo.orders = await Order.findAll({
-            where: { UserId: id },
-            include: Product,
-        });
-
-        // Don't know how to use this:
-        // https://sequelize.org/docs/v6/core-concepts/assocs/#special-methodsmixins-added-to-instances
-        // allInfo.test = await User.getOrders();
 
         res.send(allInfo);
     },
@@ -125,7 +115,7 @@ const UserController = {
                 Token.create({ token, UserId: user.id }).catch((err) => {
                     console.error(err);
                 });
-                res.send({ message: "Wellcome " + user.username, user, token });
+                res.send({ message: "Wellcome " + user.username, token, user });
             })
             .catch((err) => {
                 console.error(err);
@@ -170,8 +160,8 @@ const UserController = {
             console.log("req.body", req.body);
             const result = await User.update(
                 req.body,
-                { where: {id: req.user.id}}
-                );
+                { where: { id: req.user.id } }
+            );
 
             if (result) {
                 return res.send({ message: "User updated successfully" });
@@ -184,6 +174,11 @@ const UserController = {
             return res.status(500).send({ message: "Server error", error });
         }
 
+    },
+
+    avatar(req, res) {
+        const filepath = path.join(__dirname, '../avatars', req.params.avatar);
+        res.sendFile(filepath, {headers: {"Content-Type": "image/jpeg"}});
     }
 };
 

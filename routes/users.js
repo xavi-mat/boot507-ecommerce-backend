@@ -10,10 +10,6 @@ router.put("/", authentication, upload.single('avatar'), UserController.updateUs
 router.post("/login", UserController.login);
 router.delete("/logout", authentication, UserController.logout);
 router.get("/", authentication, UserController.getUserWithOrders);
-
-// TODO: More endpoints
-// router.get("/", UserController.getAll);
-// router.delete("/delete/:id", UserController.delete);
-// router.put("/id/:id", UserController.update);
+router.get('/avatar/:avatar', UserController.avatar);
 
 module.exports = router;
