@@ -58,27 +58,41 @@ sequelize db:seed:all
 
 ## Endpoints
 
-|method|endpoint|authentication|use|
+|method|endpoint|role|use|
 |------|--------|--------------|---|
-|POST  |`/users`|no|Register new user|
-|POST  |`/users/login`|no|Login|
-|GET   |`/users`|yes|Get own data with orders|
-|GET   |`/users/:id`|no|Get public data of user by UserId|
-|PUT   |`/users/`|||
-|DELETE|`/users/`|||
-|POST  |`/categories/`|||
-|GET   |`/categories/`|||
-|PUT   |`/categories/`|||
-|DELETE|`/categories/`|||
-|POST  |`/products/`|||
-|GET   |`/products/`|||
-|PUT   |`/products/`|||
-|DELETE|`/products/`|||
+|POST  |`/users`|anyone|Register new user|
+|POST  |`/users/login`|anyone|Login|
+|GET   |`/users`|user|Get own data with orders|
+|GET   |`/users/:id`|anyone|Get public data of user by UserId|
+|GET   |`/users//avatar/:avatar`|anyone|Get public avatar of user by UserId|
+|PUT   |`/users`|user|Update own data|
+|DELETE|`/users/delete`|user|Logout|
+
+|POST  |`/categories`|manager|Create new category|
+|GET   |`/categories`|anyone|Get all categories list|
+|GET   |`/categories/id/:id`|anyone|Get category by id|
+|GET   |`/categories/name/:name`|anyone|Get category by name|
+|PUT   |`/categories/:id`|manager|Update category by id|
+|DELETE|`/categories/:id`|manager|Delete category by id|
+
+|POST  |`/products`|manager|Create a new product|
+|GET   |`/products/list`|anyone|Get all products|
+|GET   |`/products/id/:id`|anyone|Get a product by id|
+|GET   |`/products/name/:name`|anyone|Get a product by name|
+|GET   |`/products/price/:price`|anyone|Get products by price|
+|GET   |`/products/listPrice/desc`|anyone|Get all products ordered by price, descending|
+|GET   |`/products/image/:image`|anyone|Get the image of a product|
+|PUT   |`/products/:id`|manager|Update a product|
+|DELETE|`/products/:id`|manager|Delete a product|
+
 |POST  |`/orders/`|||
 |GET   |`/orders/`|||
 |PUT   |`/orders/`|||
 |DELETE|`/orders/`|||
-|POST  |`/reviews/`|||
-|GET   |`/reviews/`|||
-|PUT   |`/reviews/`|||
-|DELETE|`/reviews/`|||
+
+|POST  |`/reviews`|user|Create a new review of a product|
+|GET   |`/reviews`|anyone|Get all reviews|
+|GET   |`/reviews/byProduct/:id`|anyone|Get all reviews of a product|
+|GET   |`/reviews//byUser/:id`|anyone|Get al reviews written by a user|
+|PUT   |`/reviews/:id`|manager|Update a review|
+|DELETE|`/reviews/:id`|user|Delete own review|
