@@ -60,24 +60,25 @@ sequelize db:seed:all
 
 |method|endpoint|authentication|use|
 |------|--------|--------------|---|
-|POST  |  /users|no|Register new user|
-|POST  |  /users/login|no|Login|
-|GET   |  /users/|||
-|PUT   |  /users/|||
-|DELETE|  /users/|||
-|POST  |  /categories/|||
-|GET   |  /categories/|||
-|PUT   |  /categories/|||
-|DELETE|  /categories/|||
-|POST  |  /products/|||
-|GET   |  /products/|||
-|PUT   |  /products/|||
-|DELETE|  /products/|||
-|POST  |  /orders/|||
-|GET   |  /orders/|||
-|PUT   |  /orders/|||
-|DELETE|  /orders/|||
-|POST  |  /reviews/|||
-|GET   |  /reviews/|||
-|PUT   |  /reviews/|||
-|DELETE|  /reviews/|||
+|POST  |`/users`|no|Register new user|
+|POST  |`/users/login`|no|Login|
+|GET   |`/users`|yes|Get own data with orders|
+|GET   |`/users/:id`|no|Get public data of user by UserId|
+|PUT   |`/users/`|||
+|DELETE|`/users/`|||
+|POST  |`/categories/`|||
+|GET   |`/categories/`|||
+|PUT   |`/categories/`|||
+|DELETE|`/categories/`|||
+|POST  |`/products/`|||
+|GET   |`/products/`|||
+|PUT   |`/products/`|||
+|DELETE|`/products/`|||
+|POST  |`/orders/`|||
+|GET   |`/orders/`|||
+|PUT   |`/orders/`|||
+|DELETE|`/orders/`|||
+|POST  |`/reviews/`|||
+|GET   |`/reviews/`|||
+|PUT   |`/reviews/`|||
+|DELETE|`/reviews/`|||
