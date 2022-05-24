@@ -17,10 +17,6 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      CategoryId: {
-        type: Sequelize.INTEGER,
-        references: { model: "categories", key: "id", onDelete: "SET NULL" },
-      },
       active: {
         type: Sequelize.BOOLEAN,
       },
