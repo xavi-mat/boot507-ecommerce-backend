@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       username: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       firstName: {
         type: Sequelize.STRING
@@ -19,12 +20,15 @@ module.exports = {
       },
       email: {
         unique: true,
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       password: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       role: {
+        allowNull: false,
         type: Sequelize.ENUM('user', 'premium', 'seller', 'manager', 'admin')
       },
       birthDate: {

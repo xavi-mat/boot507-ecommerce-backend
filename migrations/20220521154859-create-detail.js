@@ -9,17 +9,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       OrderId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'orders', key: 'id'}
       },
       ProductId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'products', key: 'id'}
       },
       quantity: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       price: {
+        allowNull: false,
         type: Sequelize.FLOAT
       },
       createdAt: {
