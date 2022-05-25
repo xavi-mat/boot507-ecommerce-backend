@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Username required (model)"
+            msg: "Username required"
           }
         }
       },
@@ -28,15 +28,15 @@ module.exports = (sequelize, DataTypes) => {
       lastName: DataTypes.STRING,
       email: {
         type: DataTypes.STRING,
-        // allowNull: false,
-        // validate: {
-        //   notNull: {
-        //     msg: "Email required (model)"
-        //   },
-        //   isEmail: {
-        //     msg: "Invalid email (model)"
-        //   }
-        // }
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Email required"
+          },
+          isEmail: {
+            msg: "Invalid email"
+          }
+        }
       },
       password: DataTypes.STRING,
       role: DataTypes.ENUM("user", "premium", "seller", "manager", "admin"),

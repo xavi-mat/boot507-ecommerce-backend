@@ -12,7 +12,18 @@ module.exports = (sequelize, DataTypes) => {
   Detail.init({
     OrderId: DataTypes.INTEGER,
     ProductId: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER,
+    quantity: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isInt: {
+          msg: "Quantity must be integer"
+        },
+        min: {
+          args: 1,
+          msg: "Quantity must be greater than zero"
+        }
+      }
+    },
     price: DataTypes.FLOAT
   }, {
     sequelize,
