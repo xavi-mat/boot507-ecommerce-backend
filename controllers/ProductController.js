@@ -1,4 +1,5 @@
-const { Product, Category } = require("../models/index.js");
+const { Product, Category, ProductCategory } = require("../models/index.js");
+const path = require("path");
 
 const ProductController = {
   create(req, res) {
@@ -13,8 +14,12 @@ const ProductController = {
       return;
     }
 
-    Product.create({ ...req.body }, req.file)
+    // If there is an image, save the filename
+    if (req.file) {
+      req.body.image = req.file.filename;
+    }
 
+    Product.create(req.body)
       .then((product) =>
         res
           .status(201)
@@ -28,7 +33,7 @@ const ProductController = {
 
   updateProduct(req, res) {
     let valid = true;
-    if (!req.body.name) {
+    if (req.body.name === "") {
       valid = false;
     }
     if (!valid) {
@@ -37,19 +42,26 @@ const ProductController = {
         .send({ message: "Insert the name of the product u want to update" });
     }
 
+    // If there is an image, save the filename
+    if (req.file) {
+      req.body.image = req.file.filename;
+    }
+
     Product.update(
-      { ...req.body },
+      req.body,
       {
         where: {
           id: req.params.id,
         },
       }
     )
-      .then((product) =>
-        res
-          .status(201)
-          .send({ message: "Product was successfully updated", product })
-      )
+      .then(result =>{
+        if (result[0]) {
+          res.send({ message: "Product was successfully updated" })
+        } else {
+          res.send({message: "Unable to update product " + req.params.id})
+        }
+      })
       .catch((err) => {
         console.error(err);
         res.send({ message: "Some error has occurred", err });
@@ -74,7 +86,13 @@ const ProductController = {
   },
 
   showProductsCategory(req, res) {
-    Product.findAll({ include: { model: Category, attributes: ["name"] } })
+    Product.findAll({
+      include: {
+        model: Category,
+        attributes: ["id", "name"],
+        through: {model: ProductCategory, attributes: []}
+      }
+    })
       .then((product) =>
         res
           .status(200)
@@ -91,12 +109,16 @@ const ProductController = {
       where: {
         id: req.params.id,
       },
-      include: { model: Category, attributes: ["name"] },
+      include: {
+        model: Category,
+        attributes: ["id", "name"],
+        through: {model: ProductCategory, attributes: []}
+      },
     })
       .then((product) =>
         res
           .status(200)
-          .send({ message: "your Product shorted By ID:", product })
+          .send({ message: "your Product By ID:", product })
       )
       .catch((err) => {
         console.error(err);
@@ -148,6 +170,11 @@ const ProductController = {
         res.send({ message: "Some error has occurred", err });
       });
   },
+
+  getImage(req, res) {
+    const filepath = path.join(__dirname, '../uploads', req.params.image);
+        res.sendFile(filepath, {headers: {"Content-Type": "image/jpeg"}});
+  }
 };
 
 module.exports = ProductController;

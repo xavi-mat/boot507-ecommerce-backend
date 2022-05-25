@@ -14,13 +14,13 @@ const authentication = async (req, res, next) => {
       },
     });
     if (!tokenFound) {
-      res.status(401).send({ message: "Unauthorized" });
+      return res.status(401).send({ message: "Unauthorized" });
     }
     req.user = user;
     next();
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: "Token error", error });
+    return res.status(500).send({ message: "Token error", error });
   }
 };
 

@@ -12,9 +12,9 @@ module.exports = {
      * }], {});
     */
     return queryInterface.bulkInsert('products', [
-      { name: 'Product 1', price: 11, description: 'Description of product 1',createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Product 2', price: 22, description: 'Description of product 2',createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Product 3', price: 33, description: 'Description of product 3',createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Product 1', price: 11, description: 'Description of product 1', image: 'f3647c7ef40feb54dd85f30ceef2546c', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Product 2', price: 22, description: 'Description of product 2', image: 'd091e08ed268104295734bfa7cb2c2d1', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Product 3', price: 33, description: 'Description of product 3', image: 'a83c4180a0f1030e7844ab4109607e1c', createdAt: new Date(), updatedAt: new Date() },
       { name: 'Product 4', price: 44, description: 'Description of product 4',createdAt: new Date(), updatedAt: new Date() },
       { name: 'Product 5', price: 55, description: 'Description of product 5',createdAt: new Date(), updatedAt: new Date() },
       { name: 'Product 6', price: 66, description: 'Description of product 6',createdAt: new Date(), updatedAt: new Date() },
