@@ -61,7 +61,6 @@ const UserController = {
         req.body.avatar = req.file.filename;
       }
 
-      console.log("req.body", req.body);
       const result = await User.update(
         req.body,
         { where: { id: req.user.id } }
