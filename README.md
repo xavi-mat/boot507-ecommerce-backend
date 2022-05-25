@@ -1,16 +1,10 @@
 # eCommerce - SoulWear
 
-<div id="top"></div>
-
 <!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="http://soulwearclothing.com/image/catalog/logo-main.png">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
-  <h3 align="center">Soul Wear</h3>
-</div>
+<p align="center">
+  <img width="400" height="240" src="http://soulwearclothing.com/image/catalog/logo-main.png">
+</p>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -25,13 +19,11 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -41,8 +33,6 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 The backend project will combine the knowledge acquired in the
 node + express technologies, in addition to mysql/sequelize.
@@ -198,7 +188,7 @@ Project Link: [Repo](https://github.com/your_username/eCommerce-backENd)
 - [x] npm sequelize
 - [x] middleware management
 - [x] capable of creating a CRUD.
-- [x]Many to Many relationship.
+- [x] Many to Many relationship.
 - [x] capable to create seeders
 - [x] Better Management of Git, Using branches and Working at same time.
 - [x] npm Knowledge whith several of its libraries
