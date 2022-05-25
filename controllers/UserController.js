@@ -9,7 +9,7 @@ const path = require("path");
 const transporter = require("../config/nodemailer");
 
 const UserController = {
-  async create(req, res) {
+  async create(req, res, next) {
     try {
       let valid = true;
       // if (
