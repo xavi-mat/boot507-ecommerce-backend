@@ -37,7 +37,8 @@
 The backend project will combine the knowledge acquired in the
 node + express technologies, in addition to mysql/sequelize.
 The student will have to make the presentation and defense of a diagram
-explaining the relationships between the tables. The project will consist of an online store (e-commerce)
+explaining the relationships between the tables. The project will consist of an
+online store (e-commerce)
 
 Use [this Link](https://docs.google.com/document/d/1yey2fRgu8OkH0T2EUfP3Svixxq7geW1HmxxoOExK6Go/edit#) to see the proyect requirements.
 
@@ -139,6 +140,253 @@ Endpoints
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+### POST /users
+* role: anyone
+* use: Register new user
+* params: none
+* body:
+* response:
+
+### POST /users/login
+* role: anyone
+* use: Login and receive jwt
+* params: none
+* body:
+* response:
+
+### GET /users
+* role: user
+* use: Get own data with orders
+* params: none
+* body:
+* response:
+
+### GET /users/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /users//avatar/:avatar
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### PUT /users
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### DELETE /users/delete
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### POST /categories
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /categories
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /categories/id/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /categories/name/:name
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### PUT /categories/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### DELETE /categories/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### POST /products
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /products/list
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /products/id/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /products/name/:name
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /products/price/:price
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /products/listPrice/desc
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /products/image/:image
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### PUT /products/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### DELETE /products/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### POST /orders
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### POST /orders/product
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /orders
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /orders/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### PUT /orders/product
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### DELETE /orders/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### DELETE /orders/product/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### POST /reviews
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /reviews
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /reviews/product/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### GET /reviews/user/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### PUT /reviews/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+### DELETE /reviews/:id
+* role:
+* use:
+* params:
+* body:
+* response:
+
+
 <!-- ROADMAP -->
 
 ## Roadmap
@@ -209,20 +457,3 @@ Project Link: [Repo](https://github.com/your_username/eCommerce-backENd)
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
 
-## Create tables from console:
-
-```
-// COMMANDS ON CONSOLE TO CREATE MODELS
-
-sequelize model:generate --name User --attributes username:string,firstName:string,lastName:string,email:string,password:string,role:enum,birthDate:date,gender:enum,active:boolean
-
-sequelize model:generate --name Category --attributes name:string
-
-sequelize model:generate --name Product --attributes name:string,price:float,description:string,CategoryId:integer,active:boolean
-
-sequelize model:generate --name Order --attributes date:date,status:enum,UserId:integer
-
-sequelize model:generate --name Detail --attributes OrderId:integer,ProductId:integer,quantity:integer,price:float
-
-sequelize model:generate --name Review --attributes UserID:integer,ProductId:integer,content:string,starts:integer,active:boolean
-```
