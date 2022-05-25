@@ -153,6 +153,8 @@ Endpoints
 * use: Login and receive jwt
 * params: none
 * body:
+    * `email`       string required
+    * `password`    string required
 * response:
 
 ### GET /users
