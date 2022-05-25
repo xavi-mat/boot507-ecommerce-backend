@@ -2,7 +2,7 @@ const { Product, Category, ProductCategory } = require("../models/index.js");
 const path = require("path");
 
 const ProductController = {
-  create(req, res) {
+  create(req, res, next) {
     let valid = true;
     if (!req.body.name) {
       valid = false;
@@ -26,12 +26,12 @@ const ProductController = {
           .send({ message: "Product was successfully created", product })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Product 1";
+        next(err);
       });
   },
 
-  updateProduct(req, res) {
+  updateProduct(req, res, next) {
     let valid = true;
     if (req.body.name === "") {
       valid = false;
@@ -55,20 +55,20 @@ const ProductController = {
         },
       }
     )
-      .then(result =>{
+      .then(result => {
         if (result[0]) {
           res.send({ message: "Product was successfully updated" })
         } else {
-          res.send({message: "Unable to update product " + req.params.id})
+          res.send({ message: "Unable to update product " + req.params.id })
         }
       })
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Product 2";
+        next(err);
       });
   },
 
-  deleteProduct(req, res) {
+  deleteProduct(req, res, next) {
     Product.destroy({
       where: {
         id: req.params.id,
@@ -80,17 +80,17 @@ const ProductController = {
           .send({ message: "🚨🚨Product was DELETED!!🚨🚨", product })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Product 3";
+        next(err);
       });
   },
 
-  showProductsCategory(req, res) {
+  showProductsCategory(req, res, next) {
     Product.findAll({
       include: {
         model: Category,
         attributes: ["id", "name"],
-        through: {model: ProductCategory, attributes: []}
+        through: { model: ProductCategory, attributes: [] }
       }
     })
       .then((product) =>
@@ -99,12 +99,12 @@ const ProductController = {
           .send({ message: "Search All Product and Category result:", product })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Product 4";
+        next(err);
       });
   },
 
-  productById(req, res) {
+  productById(req, res, next) {
     Product.findAll({
       where: {
         id: req.params.id,
@@ -112,7 +112,7 @@ const ProductController = {
       include: {
         model: Category,
         attributes: ["id", "name"],
-        through: {model: ProductCategory, attributes: []}
+        through: { model: ProductCategory, attributes: [] }
       },
     })
       .then((product) =>
@@ -121,12 +121,12 @@ const ProductController = {
           .send({ message: "your Product By ID:", product })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Product 5";
+        next(err);
       });
   },
 
-  productByName(req, res) {
+  productByName(req, res, next) {
     Product.findAll({
       where: { name: req.params.name },
     })
@@ -136,12 +136,12 @@ const ProductController = {
           .send({ message: "your Product given By Name:", product })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Product 6";
+        next(err);
       });
   },
 
-  productByPrice(req, res) {
+  productByPrice(req, res, next) {
     Product.findAll({
       where: { price: req.params.price },
     })
@@ -151,12 +151,12 @@ const ProductController = {
           .send({ message: "your Product given By Price:", product })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Product 7";
+        next(err);
       });
   },
 
-  productListPrice(req, res) {
+  productListPrice(req, res, next) {
     Product.findAll({
       order: [["price", "DESC"]],
     })
@@ -166,14 +166,18 @@ const ProductController = {
           .send({ message: "your Product given By Price:", products })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Product 8";
+        next(err);
       });
   },
 
-  getImage(req, res) {
+  getImage(req, res, next) {
     const filepath = path.join(__dirname, '../uploads', req.params.image);
-        res.sendFile(filepath, {headers: {"Content-Type": "image/jpeg"}});
+    res.sendFile(filepath, { headers: { "Content-Type": "image/jpeg" } })
+      .catch((err) => {
+        err.origin = "Product 9";
+        next(err);
+      });
   }
 };
 

@@ -1,7 +1,7 @@
 const { Category, Product, ProductCategory } = require("../models/index.js");
 
 const CategoryController = {
-    create(req, res) {
+    create(req, res, next) {
         Category.create({ ...req.body })
             .then((category) =>
                 res
@@ -9,12 +9,12 @@ const CategoryController = {
                     .send({ message: "Category was successfully created", category })
             )
             .catch((err) => {
-                console.error(err);
-                res.send({ message: "Some error has occurred", err });
+                err.origin = "Category 1";
+                next(err);
             });
     },
 
-    showAllcategoryProduct(req, res) {
+    showAllcategoryProduct(req, res, next) {
         Category.findAll({
             include: {
                 model: Product,
@@ -29,12 +29,12 @@ const CategoryController = {
                 res.status(200).send({ message: "Categories Listed", category })
             )
             .catch((err) => {
-                console.error(err);
-                res.send({ message: "Some error has occurred", err });
+                err.origin = "Category 2";
+                next(err);
             });
     },
 
-    categoryById(req, res) {
+    categoryById(req, res, next) {
         Category.findOne({
             where: {
                 id: req.params.id,
@@ -52,12 +52,12 @@ const CategoryController = {
                 res.status(200).send({ message: "Categories by Id Listed: ", category })
             )
             .catch((err) => {
-                console.error(err);
-                res.send({ message: "Some error has occurred", err });
+                err.origin = "Category 3";
+                next(err);
             });
     },
 
-    categorByName(req, res) {
+    categorByName(req, res, next) {
         Category.findAll({
             where: { name: req.params.name },
             include: {
@@ -80,7 +80,7 @@ const CategoryController = {
             });
     },
 
-    updateCategory(req, res) {
+    updateCategory(req, res, next) {
         let valid = true;
         if (!req.body.name) {
             valid = false;
@@ -88,7 +88,7 @@ const CategoryController = {
         if (!valid) {
             res
                 .status(400)
-                .send({ message: "Insert the name of the Category u want to update" });
+                .send({ message: "Category name is required" });
         }
 
         Category.update(
@@ -105,12 +105,12 @@ const CategoryController = {
                     .send({ message: "Category was successfully updated", category })
             )
             .catch((err) => {
-                console.error(err);
-                res.send({ message: "Some error has occurred", err });
+                err.origin = "Category 4";
+                next(err);
             });
     },
 
-    deleteCategory(req, res) {
+    deleteCategory(req, res, next) {
         Category.destroy({ where: { id: req.params.id } })
             .then((result) => {
                 console.log(result);
@@ -121,8 +121,8 @@ const CategoryController = {
                 }
             })
             .catch((err) => {
-                console.error(err);
-                res.send({ message: "Some error has occurred", err });
+                err.origin = "Category 5";
+                next(err);
             });
     },
 };

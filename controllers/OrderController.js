@@ -2,7 +2,7 @@ const { Order, Product, Detail } = require("../models/index.js");
 const { Op } = require('sequelize');
 
 const OrderController = {
-    create(req, res) {
+    create(req, res, next) {
         const newOrder = {
             date: new Date(),
             status: 'open',
@@ -16,13 +16,13 @@ const OrderController = {
                 });
             })
             .catch((err) => {
-                console.error(err);
-                res.send({ message: "Some error has occurred", err });
+                err.origin = "Order 1";
+                next(err);
             });
     },
 
     // We are using here async/await to avoid too much nested '.then'
-    async addProduct(req, res) {
+    async addProduct(req, res, next) {
         try {
             // Create new Detail
             const newDetail = {
@@ -51,12 +51,12 @@ const OrderController = {
             res.send({ message: "Product added in Order", product });
 
         } catch (error) {
-            console.log(error);
-            res.send({ message: "Some error", error });
+            err.origin = "Order 2";
+            next(err);
         }
     },
 
-    getAll(req, res) {
+    getAll(req, res, next) {
         Order.findAll({
             where: {
                 UserId: req.user.id
@@ -74,12 +74,12 @@ const OrderController = {
                 res.send({ message: "Order", order })
             })
             .catch(err => {
-                console.log(err);
-                res.status(500).send({ message: "Error", err });
+                err.origin = "Order 3";
+                next(err);
             })
     },
 
-    getDetails(req, res) {
+    getDetails(req, res, next) {
         Order.findAll({
             where: {
                 id: req.params.id,
@@ -98,12 +98,12 @@ const OrderController = {
                 res.send({ message: "Order", order })
             })
             .catch(err => {
-                console.log(err);
-                res.status(500).send({ message: "Error", err });
+                err.origin = "Order 4";
+                next(err);
             })
     },
 
-    async updateProduct(req, res) {
+    async updateProduct(req, res, next) {
         try {
             const updatedDetail = {
                 OrderId: req.body.OrderId,
@@ -146,12 +146,12 @@ const OrderController = {
                 res.status(404).send("Unable to update product in Order");
             }
         } catch (error) {
-            console.error(error);
-            res.send({ message: "Error", error });
+            err.origin = "Order 5";
+            next(err);
         }
     },
 
-    async deleteProduct(req, res) {
+    async deleteProduct(req, res, next) {
         try {
             // Check if user owns that Order
             const orderInfo = await Order.findOne({
@@ -188,8 +188,8 @@ const OrderController = {
                 res.status(404).send("Product not found in Order");
             }
         } catch (error) {
-            console.error(error);
-            res.send({ message: "Error", error });
+            err.origin = "Order 1";
+            next(err);
         }
     },
 

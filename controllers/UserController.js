@@ -8,7 +8,7 @@ const { jwt_secret } = require("../config/config.json")["development"];
 const path = require("path");
 
 const UserController = {
-    create(req, res) {
+    create(req, res, next) {
         let valid = true;
         // if (
         //     !req.body.username ||
@@ -41,13 +41,12 @@ const UserController = {
                     .send({ message: "User was successfully created", user });
             })
             .catch((err) => {
-                console.error(err);
-                res.status(422).send({ message: "Invalid data 2", err });
-                return;
+                err.origin = "User 1";
+                next(err);
             });
     },
 
-    logout(req, res) {
+    logout(req, res, next) {
         Token.destroy({
             where: {
                 [Op.and]: [
@@ -61,18 +60,16 @@ const UserController = {
                 res.send({ message: "Desconectado con éxito", result });
             })
             .catch((err) => {
-                console.log(err);
-                res
-                    .status(500)
-                    .send({ message: "hubo un problema al tratar de desconectarte" });
+                err.origin = "User 2";
+                next(err);
             });
     },
 
-    async getUserWithOrders(req, res) {
+    async getUserWithOrders(req, res, next) {
         const allInfo = {};
 
         // User's info
-        allInfo.user = await User.findByPk(req.user.id,{
+        allInfo.user = await User.findByPk(req.user.id, {
             attributes: { exclude: ["password"] },
             include: {
                 model: Order,
@@ -91,7 +88,7 @@ const UserController = {
         res.send(allInfo);
     },
 
-    login(req, res) {
+    login(req, res, next) {
         User.findOne({
             where: {
                 email: req.body.email,
@@ -112,18 +109,20 @@ const UserController = {
                         .send({ message: "Usuario o contraseña incorrectos" });
                 }
                 const token = jwt.sign({ id: user.id }, jwt_secret);
-                Token.create({ token, UserId: user.id }).catch((err) => {
-                    console.error(err);
-                });
+                Token.create({ token, UserId: user.id })
+                    .catch((err) => {
+                        err.origin = "User 3";
+                        next(err);
+                    });
                 res.send({ message: "Wellcome " + user.username, token, user });
             })
             .catch((err) => {
-                console.error(err);
-                res.status(500).send({ message: "Internal error" });
+                err.origin = "User 4";
+                next(err);
             });
     },
 
-    async updateUser(req, res) {
+    async updateUser(req, res, next) {
 
         try {
             // VALIDATIONS
@@ -170,18 +169,18 @@ const UserController = {
             }
 
         } catch (error) {
-            console.log(error);
-            return res.status(500).send({ message: "Server error", error });
+            err.origin = "User 5";
+            next(err);
         }
 
     },
 
-    avatar(req, res) {
+    avatar(req, res, next) {
         const filepath = path.join(__dirname, '../avatars', req.params.avatar);
-        res.sendFile(filepath, {headers: {"Content-Type": "image/jpeg"}});
+        res.sendFile(filepath, { headers: { "Content-Type": "image/jpeg" } });
     },
 
-    getPublicUserInfo(req, res) {
+    getPublicUserInfo(req, res, next) {
         User.findOne({
             where: {
                 id: req.params.id,
@@ -189,13 +188,13 @@ const UserController = {
             },
             attributes: ["id", "username", "avatar"]
         })
-        .then(user=>{
-            res.send({user})
-        })
-        .catch(error=>{
-            console.log(error);
-            res.status(400).send({message: "Error"})
-        })
+            .then(user => {
+                res.send({ user })
+            })
+            .catch(error => {
+                err.origin = "User 6";
+                next(err);
+            })
     }
 };
 

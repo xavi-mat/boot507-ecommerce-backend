@@ -2,7 +2,8 @@ const { Review, User, Product } = require("../models/index.js");
 const { Op } = require("sequelize");
 
 const ReviewController = {
-  create(req, res) {
+
+  create(req, res, next) {
     const newReview = {
       UserId: req.user.id,
       ProductId: req.body.ProductId,
@@ -15,32 +16,34 @@ const ReviewController = {
         res.status(201).send({ message: "Review successfully Posted", review })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Review 1";
+        next(err);
       });
   },
-  getByProduct(req, res) {
+
+  getByProduct(req, res, next) {
     Review.findAll({ where: { ProductId: req.params.id } })
       .then((result) => {
         res.send({ message: "Reviews by Product", result });
       })
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Review 2";
+        next(err);
       });
   },
-  getByUser(req, res) {
+
+  getByUser(req, res, next) {
     Review.findAll({ where: { UserId: req.params.id } })
       .then((result) => {
         res.send({ message: "Reviews by User", result });
       })
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Review 3";
+        next(err);
       });
   },
 
-  getAllReviews(req, res) {
+  getAllReviews(req, res, next) {
     Review.findAll({
       include: [
         {
@@ -54,12 +57,12 @@ const ReviewController = {
         res.send({ message: "Reviews by User", result });
       })
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Review 4";
+        next(err);
       });
   },
 
-  updateReview(req, res) {
+  updateReview(req, res, next) {
     Product.update(
       { ...req.body },
       {
@@ -74,12 +77,12 @@ const ReviewController = {
           .send({ message: "Review was successfully updated", result })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Review 5";
+        next(err);
       });
   },
 
-  deleteReview(req, res) {
+  deleteReview(req, res, next) {
     Product.destroy({
       where: {
         [Op.and]: [{ id: req.params.id }, { UserId: req.user.id }],
@@ -91,8 +94,8 @@ const ReviewController = {
           .send({ message: "🚨🚨 Review was DELETED!!🚨🚨", result })
       )
       .catch((err) => {
-        console.error(err);
-        res.send({ message: "Some error has occurred", err });
+        err.origin = "Review 6";
+        next(err);
       });
   },
 };
