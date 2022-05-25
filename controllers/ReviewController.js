@@ -1,5 +1,4 @@
-const { Review, User, Product } = require("../models/index.js");
-const { Op } = require("sequelize");
+const { Review } = require("../models/index.js");
 
 const ReviewController = {
 
