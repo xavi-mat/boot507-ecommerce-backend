@@ -20,9 +20,9 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Username required (model)"
-          }
-        }
+            msg: "Username required (model)",
+          },
+        },
       },
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
@@ -44,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       gender: DataTypes.ENUM("M", "F"),
       avatar: DataTypes.STRING,
       active: DataTypes.BOOLEAN,
+      confirmed: DataTypes.BOOLEAN,
     },
     {
       sequelize,
