@@ -64,7 +64,7 @@ sequelize db:seed:all
 |POST  |`/users/login`|anyone|Login|
 |GET   |`/users`|user|Get own data with orders|
 |GET   |`/users/:id`|anyone|Get public data of user by `id`|
-|GET   |`/users//avatar/:avatar`|anyone|Get public avatar of user by `id`|
+|GET   |`/users/avatar/:avatar`|anyone|Get public avatar of user by avatar code|
 |PUT   |`/users`|user|Update own data|
 |DELETE|`/users/delete`|user|Logout|
 |POST  |`/categories`|manager|Create new category|
