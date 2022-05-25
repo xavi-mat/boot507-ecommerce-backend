@@ -2,6 +2,7 @@ const { Product, Category, ProductCategory } = require("../models/index.js");
 const path = require("path");
 
 const ProductController = {
+
   create(req, res, next) {
     let valid = true;
     if (!req.body.name) {
@@ -171,13 +172,16 @@ const ProductController = {
       });
   },
 
-  getImage(req, res, next) {
-    const filepath = path.join(__dirname, '../uploads', req.params.image);
-    res.sendFile(filepath, { headers: { "Content-Type": "image/jpeg" } })
-      .catch((err) => {
-        err.origin = "Product 9";
-        next(err);
-      });
+  async getImage(req, res, next) {
+
+    try {
+      const filepath = path.join(__dirname, '../uploads', req.params.image);
+      res.sendFile(filepath, { headers: { "Content-Type": "image/jpeg" } });
+
+    } catch (error) {
+      error.origin = "Product 9";
+      next(error);
+    }
   }
 };
 

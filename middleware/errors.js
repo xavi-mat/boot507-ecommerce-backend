@@ -1,10 +1,14 @@
 'use strict';
 
 const handleValidationError = (err, res) => {
-    let errors = err.errors.map(el => el.message);
-    const string = errors.join(' || ') + ` (Origin: ${err.origin})`;
-    return res.status(400).send({messages: string});
- }
+    try {
+        let errors = err.errors.map(el => el.message);
+        const string = errors.join(' || ') + ` (Origin: ${err.origin})`;
+        return res.status(400).send({ messages: string });
+    } catch (error) {
+        return res.status(400).send("ERROR");
+    }
+}
 
 const typeError = (err, req, res, next) => {
     const errOrigin = err.origin
@@ -20,6 +24,6 @@ const typeError = (err, req, res, next) => {
     //     } else {
     //         res.status(500).send('Hubo un problema a la hora de crear un Usuario');
     //     }
-    }
+}
 
 module.exports = { typeError }
