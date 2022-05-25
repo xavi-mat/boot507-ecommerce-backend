@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING,
     stars: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
+        notNull: {
+          msg: "Stars required"
+        },
         isInt: {
           msg: "Stars must be integer"
         },

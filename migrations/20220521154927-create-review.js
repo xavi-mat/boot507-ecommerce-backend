@@ -22,6 +22,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       stars: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       active: {
