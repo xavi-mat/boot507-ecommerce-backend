@@ -92,7 +92,7 @@ const CategoryController = {
         }
 
         Category.update(
-            { ...req.body },
+            req.body,
             {
                 where: {
                     id: req.params.id,
