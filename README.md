@@ -97,8 +97,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 This is a list of Endpoints that you can use in postman to Test our Project.
 
-```
- Endpoints
+Endpoints
 
 | method | endpoint                   | role    | use                                           |
 | ------ | -------------------------- | ------- | --------------------------------------------- |
@@ -137,8 +136,6 @@ This is a list of Endpoints that you can use in postman to Test our Project.
 | GET    | `/reviews/user/:id`        | anyone  | Get al reviews written by a user              |
 | PUT    | `/reviews/:id`             | manager | Update a review                               |
 | DELETE | `/reviews/:id`             | user    | Delete own review                             |
-
-```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
