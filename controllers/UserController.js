@@ -10,70 +10,85 @@ const transporter = require("../config/nodemailer");
 
 const UserController = {
   async create(req, res) {
-      try{
-    let valid = true;
-    // if (
-    //     !req.body.username ||
-    //     !req.body.firstName ||
-    //     !req.body.lastName ||
-    //     !req.body.password ||
-    //     !req.body.email
-    // ) {
-    //     valid = false;
-    // }
+    try {
+      let valid = true;
+      // if (
+      //     !req.body.username ||
+      //     !req.body.firstName ||
+      //     !req.body.lastName ||
+      //     !req.body.password ||
+      //     !req.body.email
+      // ) {
+      //     valid = false;
+      // }
 
-    // TODO: Function "validateEmail"
-    // if (!validateEmail(re.body.email)) {
-    //   valid = false;
-    // }
+      // TODO: Function "validateEmail"
+      // if (!validateEmail(re.body.email)) {
+      //   valid = false;
+      // }
 
-    if (!valid) {
-      res.status(400).send({ message: "Invalid data" });
-      return;
-    }
+      if (!valid) {
+        res.status(400).send({ message: "Invalid data" });
+        return;
+      }
 
-    req.body.role = "user"; // Assing role by default
-    req.body.password = bcrypt.hashSync(req.body.password, 10);
-    req.body.active = true;
-    req.body.confirmed = false;
+      req.body.role = "user"; // Assing role by default
+      req.body.password = bcrypt.hashSync(req.body.password, 10);
+      req.body.active = true;
+      req.body.confirmed = false;
 
-    const user = await User.create(req.body);
-    await transporter.sendMail({
-      to: req.body.email,
+      const user = await User.create(req.body);
+      const emailToken = jwt.sign({ email: req.body.email }, jwt_secret, {
+        expiresIn: "48h",
+      });
+      const url = "http://localhost:8080/users/confirm/" + emailToken;
+      await transporter.sendMail({
+        to: req.body.email,
 
-      subject: "Confirme su registro",
+        subject: "Confirme su registro",
 
-      html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
+        html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
 
-<a href="#"> Click para confirmar tu registro</a>
+<a href="${url}"> Click para confirmar tu registro</a> Este enlace Caduca en 48 horas.
 
 `,
-    });
-    res.status(201).send({
+      });
+      res.status(201).send({
+        message: "Te hemos enviado un correo para confirmar el registro",
 
-    message: "Te hemos enviado un correo para confirmar el registro",
+        user,
+      });
+      res.status(201).send({
+        message: "Te hemos enviado un correo para confirmar el registro",
 
-    user,
+        user,
+      });
+    } catch (err) {
+      err.origin = "User";
 
-});
-res.status(201).send({
+      next(err);
+    }
+  },
 
-message: "Te hemos enviado un correo para confirmar el registro",
+  async confirm(req, res) {
+    try {
+      const token = req.params.emailToken;
+      const payload = jwt.verify(token, jwt_secret);
 
-user,
+      await User.update(
+        { confirmed: true },
+        {
+          where: {
+            email: payload.email,
+          },
+        }
+      );
 
-});
-
-}catch (err) {
-
-err.origin = “User”;
-
-next(err)
- }
-
-},
-
-
+      res.status(201).send("Usuario confirmado con éxito");
+    } catch (error) {
+      console.error(error);
+    }
+  },
 
   logout(req, res) {
     Token.destroy({

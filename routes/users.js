@@ -13,6 +13,7 @@ router.put(
   UserController.updateUser
 );
 router.post("/login", UserController.login);
+router.get("/confirm/:emailToken", UserController.confirm);
 router.delete("/logout", authentication, UserController.logout);
 router.get("/", authentication, UserController.getUserWithOrders);
 router.get("/:id", UserController.getPublicUserInfo);
