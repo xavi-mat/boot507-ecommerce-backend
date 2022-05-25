@@ -15,10 +15,29 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      username: DataTypes.STRING,
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Username required (model)"
+          }
+        }
+      },
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
-      email: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        // allowNull: false,
+        // validate: {
+        //   notNull: {
+        //     msg: "Email required (model)"
+        //   },
+        //   isEmail: {
+        //     msg: "Invalid email (model)"
+        //   }
+        // }
+      },
       password: DataTypes.STRING,
       role: DataTypes.ENUM("user", "premium", "seller", "manager", "admin"),
       birthDate: DataTypes.DATE,

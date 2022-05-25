@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       UserId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'users', key: 'id'}
       },
       ProductId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'products', key: 'id'}
       },
@@ -21,10 +23,6 @@ module.exports = {
       },
       stars: {
         type: Sequelize.INTEGER,
-        validate: {
-          min: 1,
-          max: 5
-        }
       },
       active: {
         type: Sequelize.BOOLEAN

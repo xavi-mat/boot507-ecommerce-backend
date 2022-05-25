@@ -9,9 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       token: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       UserId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "users", key: "id" },
       },

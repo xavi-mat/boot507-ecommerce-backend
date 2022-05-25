@@ -10,15 +10,15 @@ const path = require("path");
 const UserController = {
     create(req, res) {
         let valid = true;
-        if (
-            !req.body.username ||
-            !req.body.firstName ||
-            !req.body.lastName ||
-            !req.body.password ||
-            !req.body.email
-        ) {
-            valid = false;
-        }
+        // if (
+        //     !req.body.username ||
+        //     !req.body.firstName ||
+        //     !req.body.lastName ||
+        //     !req.body.password ||
+        //     !req.body.email
+        // ) {
+        //     valid = false;
+        // }
 
         // TODO: Function "validateEmail"
         // if (!validateEmail(re.body.email)) {
@@ -42,7 +42,7 @@ const UserController = {
             })
             .catch((err) => {
                 console.error(err);
-                res.status(422).send({ message: "Invalid data" });
+                res.status(422).send({ message: "Invalid data 2", err });
                 return;
             });
     },
