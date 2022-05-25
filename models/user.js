@@ -38,7 +38,15 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      password: DataTypes.STRING,
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Password required"
+          }
+        }
+      },
       role: DataTypes.ENUM("user", "premium", "seller", "manager", "admin"),
       birthDate: DataTypes.DATE,
       gender: DataTypes.ENUM("M", "F"),

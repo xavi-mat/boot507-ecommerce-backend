@@ -9,28 +9,12 @@ const path = require("path");
 
 const UserController = {
     create(req, res, next) {
-        let valid = true;
-        // if (
-        //     !req.body.username ||
-        //     !req.body.firstName ||
-        //     !req.body.lastName ||
-        //     !req.body.password ||
-        //     !req.body.email
-        // ) {
-        //     valid = false;
-        // }
 
-        // TODO: Function "validateEmail"
-        // if (!validateEmail(re.body.email)) {
-        //   valid = false;
-        // }
-
-        if (!valid) {
-            res.status(400).send({ message: "Invalid data" });
-            return;
+        if (!req.body.password) {
+            return res.status(400).send({ message: "Password required" });
         }
 
-        req.body.role = "user"; // Assing role by default
+        req.body.role = "user";  // Assing role by default
         req.body.password = bcrypt.hashSync(req.body.password, 10);
         req.body.active = true;
 
