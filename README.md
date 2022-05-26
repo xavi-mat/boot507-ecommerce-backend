@@ -138,6 +138,11 @@ Endpoints
 | PUT    | `/reviews/:id`             | manager | Update a review                               |
 | DELETE | `/reviews/:id`             | user    | Delete own review                             |
 
+
+Full API endpoints documentation:
+
+[https://documenter.getpostman.com/view/11287519/Uz5Aqy5R](https://documenter.getpostman.com/view/11287519/Uz5Aqy5R)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
