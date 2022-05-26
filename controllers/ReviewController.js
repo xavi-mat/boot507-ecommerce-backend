@@ -1,4 +1,5 @@
-const { Review } = require("../models/index.js");
+const { Review, User, Product } = require("../models/index.js");
+const { Op } = require("sequelize");
 
 const ReviewController = {
 
@@ -82,7 +83,7 @@ const ReviewController = {
   },
 
   deleteReview(req, res, next) {
-    Product.destroy({
+    Review.destroy({
       where: {
         [Op.and]: [{ id: req.params.id }, { UserId: req.user.id }],
       },
