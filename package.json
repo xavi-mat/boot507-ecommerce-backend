@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node main.js",
     "dev": "nodemon main.js"
   },
@@ -23,7 +23,8 @@
   "homepage": "https://github.com/Dubesor22/eCommerce-backEnd#readme",
   "devDependencies": {
     "jest": "^28.1.0",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
