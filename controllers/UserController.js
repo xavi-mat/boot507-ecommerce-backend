@@ -25,16 +25,16 @@ const UserController = {
         expiresIn: "48h",
       });
       const url = "http://localhost:8080/users/confirm/" + emailToken;
-      await transporter.sendMail({
-        to: req.body.email,
-        subject: "Confirme su registro",
-        html: `<h3>B🚨🚨ienvenido, estás a un paso de registrarte </h3>
-          <a href="${url}"> Click para confirmar tu registro</a>
-          Este enlace Caduca en 48 horas.`,
-      });
+      // await transporter.sendMail({
+      //   to: req.body.email,
+      //   subject: "Confirme su registro",
+      //   html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
+      //     <a href="${url}"> Click para confirmar tu registro</a>
+      //     Este enlace Caduca en 48 horas.`,
+      // });
       //🚨🚨🚨port 465 is currently closed🚨🚨🚨
       res.status(201).send({
-        message: "Te hemos enviado un correo para confirmar el registro",
+        message: "We have sent a mail to confirm the registration",
         user,
       });
     } catch (err) {
