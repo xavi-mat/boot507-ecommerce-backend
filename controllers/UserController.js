@@ -9,10 +9,8 @@ const path = require("path");
 const transporter = require("../config/nodemailer");
 
 const UserController = {
-
   async create(req, res, next) {
     try {
-
       if (!req.body.password) {
         return res.status(400).send({ message: "Password required" });
       }
@@ -30,10 +28,11 @@ const UserController = {
       await transporter.sendMail({
         to: req.body.email,
         subject: "Confirme su registro",
-        html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
+        html: `<h3>B🚨🚨ienvenido, estás a un paso de registrarte </h3>
           <a href="${url}"> Click para confirmar tu registro</a>
           Este enlace Caduca en 48 horas.`,
       });
+      //🚨🚨🚨port 465 is currently closed🚨🚨🚨
       res.status(201).send({
         message: "Te hemos enviado un correo para confirmar el registro",
         user,
@@ -45,7 +44,6 @@ const UserController = {
   },
 
   async updateUser(req, res, next) {
-
     try {
       // Dont' allow to update 'role':
       req.body.role = req.user.role;
@@ -61,17 +59,15 @@ const UserController = {
         req.body.avatar = req.file.filename;
       }
 
-      const result = await User.update(
-        req.body,
-        { where: { id: req.user.id } }
-      );
+      const result = await User.update(req.body, {
+        where: { id: req.user.id },
+      });
 
       if (result) {
         return res.send({ message: "User updated successfully" });
       } else {
         return res.send({ message: "Can't update user" });
       }
-
     } catch (error) {
       err.origin = "User Update";
       next(err);
@@ -79,25 +75,19 @@ const UserController = {
   },
 
   async login(req, res, next) {
-
     try {
-
       const user = await User.findOne({
-        where: { email: req.body.email }
+        where: { email: req.body.email },
       });
 
       if (!user) {
-        return res
-          .status(400)
-          .send({ message: "Wrong credentials" });
+        return res.status(400).send({ message: "Wrong credentials" });
       }
 
       const isMatch = await bcrypt.compare(req.body.password, user.password);
 
       if (!isMatch) {
-        return res
-          .status(400)
-          .send({ message: "Wrong credentials" });
+        return res.status(400).send({ message: "Wrong credentials" });
       }
 
       if (!user.confirmed) {
@@ -109,12 +99,10 @@ const UserController = {
       await Token.create({ token, UserId: user.id });
 
       res.send({ message: "Wellcome " + user.username, token, user });
-
     } catch (error) {
       error.origin = "User Login";
       next(error);
     }
-
   },
 
   async confirm(req, res) {
@@ -150,7 +138,6 @@ const UserController = {
       } else {
         return res.send({ message: "Unable to logout", result });
       }
-
     } catch (error) {
       error.origin = "User Logout";
       next(error);
@@ -158,7 +145,6 @@ const UserController = {
   },
 
   async getUserWithOrders(req, res, next) {
-
     const allInfo = {};
 
     // User's info
@@ -172,44 +158,40 @@ const UserController = {
           attributes: ["id", "quantity", "price"],
           include: {
             model: Product,
-            attributes: ["id", "name", "image"]
-          }
-        }
-      }
+            attributes: ["id", "name", "image"],
+          },
+        },
+      },
     });
   },
-
 
   async getPublicUserInfo(req, res, next) {
     try {
       const user = await User.findOne({
         where: {
           id: req.params.id,
-          role: "user"
+          role: "user",
         },
-        attributes: ["id", "username", "avatar"]
+        attributes: ["id", "username", "avatar"],
       });
 
       return res.send({ user });
-
     } catch (error) {
       error.origin = "User Public Info";
-      next(error)
+      next(error);
     }
   },
 
   async avatar(req, res, next) {
-
     try {
-      const filepath = path.join(__dirname, '../avatars', req.params.avatar);
+      const filepath = path.join(__dirname, "../avatars", req.params.avatar);
 
       res.sendFile(filepath, { headers: { "Content-Type": "image/jpeg" } });
-
     } catch (error) {
       error.origin = "User Avatar";
       next(error);
     }
-  }
+  },
 };
 
 module.exports = UserController;
