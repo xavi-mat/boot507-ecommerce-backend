@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watchAll",
     "start": "node main.js",
     "dev": "nodemon main.js"
   },
