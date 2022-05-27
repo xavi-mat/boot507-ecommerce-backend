@@ -40,6 +40,8 @@ The student will have to make the presentation and defense of a diagram
 explaining the relationships between the tables. The project will consist of an
 online store (e-commerce)
 
+![diagram](./doc/diagram02.png)
+
 Use [this Link](https://docs.google.com/document/d/1yey2fRgu8OkH0T2EUfP3Svixxq7geW1HmxxoOExK6Go/edit#) to see the proyect requirements.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -138,13 +140,11 @@ Endpoints
 | PUT    | `/reviews/:id`             | manager | Update a review                               |
 | DELETE | `/reviews/:id`             | user    | Delete own review                             |
 
-
 Full API endpoints documentation:
 
 [https://documenter.getpostman.com/view/11287519/Uz5Aqy5R](https://documenter.getpostman.com/view/11287519/Uz5Aqy5R)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- ROADMAP -->
 
@@ -215,4 +215,3 @@ Project Link: [Repo](https://github.com/your_username/eCommerce-backENd)
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
-
