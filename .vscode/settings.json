@@ -1,0 +1,11 @@
+{
+    // fontSize just for testing purposes, commented out.
+    //"editor.fontSize" : 12
+    // StatusBar color:
+    "workbench.colorCustomizations": {
+        "tab.inactiveBackground": "#001a00",
+        "statusBar.background": "#001a00",
+        "activityBar.background": "#001a00",
+        "sideBar.background": "#001a00"
+    }
+}
