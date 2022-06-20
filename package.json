@@ -7,8 +7,6 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watchAll",
     "start": "node main.js",
     "dev": "nodemon main.js"
   },
@@ -23,7 +21,6 @@
   },
   "homepage": "https://github.com/Dubesor22/eCommerce-backEnd#readme",
   "devDependencies": {
-    "jest": "^28.1.0",
     "nodemon": "^2.0.16",
     "supertest": "^6.2.3"
   },
