@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const { typeError } = require("./middleware/errors");
+const cors = require("cors");
 
 const port = 8080;
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/products", require("./routes/products"));
@@ -15,5 +17,3 @@ app.use("/reviews", require("./routes/reviews"));
 app.use(typeError);
 
 app.listen(port, () => console.log("Server running in port: " + port));
-
-module.exports = app;
