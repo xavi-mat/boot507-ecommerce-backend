@@ -98,7 +98,7 @@ const UserController = {
 
       await Token.create({ token, UserId: user.id });
 
-      res.send({ message: "Wellcome " + user.username, token, user });
+      res.send({ message: "Welcome " + user.username, token, user });
     } catch (error) {
       error.origin = "User Login";
       next(error);
