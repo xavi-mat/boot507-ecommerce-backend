@@ -35,7 +35,7 @@ const UserController = {
       //🚨🚨🚨port 465 is currently closed🚨🚨🚨
       res.status(201).send({
         message: "We have sent a mail to confirm the registration",
-        user,
+        url,
       });
     } catch (err) {
       err.origin = "User 1";
