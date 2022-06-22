@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.json")["development"];
 const path = require("path");
+const fs = require("fs");
 const transporter = require("../config/nodemailer");
 
 const UserController = {
@@ -184,8 +185,10 @@ const UserController = {
 
   async avatar(req, res, next) {
     try {
-      const filepath = path.join(__dirname, "../avatars", req.params.avatar);
-
+      let filepath = path.join(__dirname, "../avatars", req.params.avatar);
+      if (!fs.existsSync(filepath)) {
+        filepath = path.join(__dirname, "../avatars", "avatar");
+      }
       res.sendFile(filepath, { headers: { "Content-Type": "image/jpeg" } });
     } catch (error) {
       error.origin = "User Avatar";
