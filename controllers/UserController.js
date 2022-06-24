@@ -146,24 +146,31 @@ const UserController = {
   },
 
   async getUserWithOrders(req, res, next) {
-    const allInfo = {};
-
-    // User's info
-    allInfo.user = await User.findByPk(req.user.id, {
-      attributes: { exclude: ["password"] },
-      include: {
-        model: Order,
-        attributes: ["id", "date"],
+    try {
+      const user = await User.findByPk(req.user.id, {
+        attributes: { exclude: ["password"] },
         include: {
-          model: Detail,
-          attributes: ["id", "quantity", "price"],
+          model: Order,
+          attributes: ["id", "date"],
           include: {
-            model: Product,
-            attributes: ["id", "name", "image"],
+            model: Detail,
+            attributes: ["id", "quantity", "price"],
+            include: {
+              model: Product,
+              attributes: ["id", "name", "image"],
+            },
           },
         },
-      },
-    });
+      });
+      if (user) {
+        return res.send({ message: "User's info", user });
+      } else {
+        return res.send({ message: "Unable to find info" })
+      }
+    } catch (error) {
+      error.origin = "User getInfoWithOrders";
+      next(error);
+    }
   },
 
   async getPublicUserInfo(req, res, next) {

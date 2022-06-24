@@ -106,7 +106,7 @@ const ProductController = {
   },
 
   productById(req, res, next) {
-    Product.findAll({
+    Product.findOne({
       where: {
         id: req.params.id,
       },
