@@ -116,7 +116,8 @@ const UserController = {
         { where: { email: payload.email } }
       );
 
-      res.status(201).send("User confirmed");
+      // res.status(201).send("User confirmed");
+      res.redirect("http://localhost:3000/login?confirmed=true");
     } catch (error) {
       error.origin = "User Confirm";
       next(error);
