@@ -50,7 +50,7 @@ const OrderController = {
 
             res.send({ message: "Product added in Order", product });
 
-        } catch (error) {
+        } catch (err) {
             err.origin = "Order 2";
             next(err);
         }
