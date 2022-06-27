@@ -26,7 +26,7 @@ const ReviewController = {
       where: { ProductId: req.params.id },
       include: {
         model: User,
-        attributes:["id", "username", "avatar"]
+        attributes: ["id", "username", "avatar"]
       }
     })
       .then((result) => {
@@ -69,17 +69,18 @@ const ReviewController = {
   },
 
   updateReview(req, res, next) {
-    Product.update(
-      { ...req.body },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
+    const updatedReview = {
+      content: req.body.content,
+      stars: req.body.stars,
+      active: req.body.active,
+    }
+    Review.update(
+      updatedReview,
+      { where: { id: req.params.id, }, }
     )
       .then((result) =>
         res
-          .status(201)
+          .status(200)
           .send({ message: "Review was successfully updated", result })
       )
       .catch((err) => {
