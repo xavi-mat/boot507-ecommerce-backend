@@ -46,23 +46,30 @@ const UserController = {
 
   async updateUser(req, res, next) {
     try {
+      const updatedUser = {};
+      updatedUser.username = req.body.username;
+      updatedUser.firstName = req.body.firstName;
+      updatedUser.lastName = req.body.lastName;
+      updatedUser.birthDate = req.body.birthDate ? req.body.birthDate : undefined;
+
       // Dont' allow to update 'role':
-      req.body.role = req.user.role;
+      updatedUser.role = req.user.role;
 
       // Hash password, if updated:
-      if (req.body.password !== undefined) {
-        req.body.password = bcrypt.hashSync(req.body.password, 10);
+      if (req.body.password) {
+        updatedUser.password = bcrypt.hashSync(req.body.password, 10);
       }
-      req.body.active = true;
+      updatedUser.active = req.user.active;
 
       // If there is an avatar, get the filename
       if (req.file) {
-        req.body.avatar = req.file.filename;
+        updatedUser.avatar = req.file.filename;
       }
 
-      const result = await User.update(req.body, {
-        where: { id: req.user.id },
-      });
+      const result = await User.update(
+        updatedUser,
+        { where: { id: req.user.id }, }
+      );
 
       if (result) {
         return res.send({ message: "User updated successfully" });
