@@ -22,7 +22,13 @@ const ReviewController = {
   },
 
   getByProduct(req, res, next) {
-    Review.findAll({ where: { ProductId: req.params.id } })
+    Review.findAll({
+      where: { ProductId: req.params.id },
+      include: {
+        model: User,
+        attributes:["id", "username", "avatar"]
+      }
+    })
       .then((result) => {
         res.send({ message: "Reviews by Product", result });
       })
